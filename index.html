@@ -1,0 +1,1978 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>GT7 Setup Index</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: strict 12-col Swiss grid. Hairline rules, flush-left type, one red accent. Three numbered selectors feed one setup sheet. */
+:root{
+  --bg:#FAFAFA; --fg:#0B0B0C; --mute:#6A6A6E; --rule:#0B0B0C; --soft:#ECECEC; --hair:#D6D6D6; --accent:#E10600; --onaccent:#FFFFFF;
+  --good:#0A7A3D; --warn:#B25E00;
+  --sans:"Hanken Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0C0C0D; --fg:#F2F2F0; --mute:#8E8E93; --rule:#F2F2F0; --soft:#1A1A1C; --hair:#333336; --accent:#FF3B2F; --onaccent:#0C0C0D; --good:#4CC17D; --warn:#F0A040; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C0C0D; --fg:#F2F2F0; --mute:#8E8E93; --rule:#F2F2F0; --soft:#1A1A1C; --hair:#333336; --accent:#FF3B2F; --onaccent:#0C0C0D; --good:#4CC17D; --warn:#F0A040; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.45;
+  padding-inline:0}
+.wrap{max-width:1280px;margin:0 auto;padding-block:0 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.lab{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:500}
+
+header{border-top:6px solid var(--fg);padding-top:14px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px;align-items:end}
+header .brand{grid-column:span 6;font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+header .meta{grid-column:span 6;color:var(--mute);font-size:12px;display:flex;justify-content:flex-end;align-items:center;gap:16px;flex-wrap:wrap;text-align:right}
+.setwrap{position:relative}
+.setbtn{display:flex;align-items:center;gap:6px;color:var(--fg);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 0;border-bottom:1px solid var(--fg)}
+.setbtn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.setbtn:hover,.setbtn[aria-expanded="true"]{color:var(--accent);border-color:var(--accent)}
+.setpanel{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(300px,calc(100vw - 32px));background:var(--bg);color:var(--fg);border:1px solid var(--fg);border-top:4px solid var(--accent);padding:14px 16px 6px;text-align:left;box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.sgrp{margin-bottom:14px}
+.sgrp .lab{margin-bottom:6px}
+.seg{display:flex;border:1px solid var(--fg)}
+.seg button{flex:1;text-align:center;padding:7px 6px;font-size:13px;font-weight:500}
+.seg button+button{border-left:1px solid var(--fg)}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg);font-weight:700}
+.seg button:not([aria-pressed="true"]):hover{color:var(--accent)}
+.sgrp .fine{margin:6px 0 0}
+h1{grid-column:1/-1;font-weight:800;font-size:clamp(40px,8.2vw,112px);line-height:.92;letter-spacing:-.035em;margin:40px 0 28px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+.intro{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-bottom:48px}
+.intro p{grid-column:span 6;margin:0;color:var(--mute);max-width:52ch}
+.intro p:first-child{grid-column:7 / span 6}
+
+.select{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--fg)}
+.panel{padding:14px 20px 20px 0;border-right:1px solid var(--hair);min-width:0}
+.panel+.panel{padding-left:20px}
+.panel:last-child{border-right:0;padding-right:0}
+.ph{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.ph .n{font-weight:800;font-size:44px;line-height:1;letter-spacing:-.04em;color:var(--accent)}
+.ph h2{margin:0;font-size:20px;font-weight:700;letter-spacing:-.01em}
+.ph .count{margin-left:auto;color:var(--mute);font-size:12px}
+.field{width:100%;border:0;border-bottom:1px solid var(--fg);background:transparent;padding:8px 0;border-radius:0;margin-bottom:8px;outline-offset:4px}
+select.field{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--fg) 50%),linear-gradient(135deg,var(--fg) 50%,transparent 50%);background-position:calc(100% - 12px) 55%,calc(100% - 7px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+select.field option{background:var(--bg);color:var(--fg)}
+.list{height:340px;overflow:auto;border-top:1px solid var(--hair);margin-top:4px;scrollbar-width:thin}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;width:100%;padding:8px 8px 8px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+.row:hover{background:var(--soft)}
+.row .t{font-weight:500;overflow-wrap:anywhere}
+.row .s{grid-column:1;color:var(--mute);font-size:12px}
+.row .r{grid-row:1 / span 2;grid-column:2;text-align:right;font-size:12px;color:var(--mute);align-self:center}
+.row[aria-pressed="true"]{background:var(--fg);color:var(--bg);padding-left:8px}
+.row[aria-pressed="true"] .s,.row[aria-pressed="true"] .r{color:var(--bg);opacity:.75}
+.tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor;padding:0 4px;margin-left:6px;vertical-align:1px;font-weight:500}
+.tag.new{color:var(--accent)}
+.row[aria-pressed="true"] .tag.new{color:var(--bg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.chip{border:1px solid var(--fg);padding:3px 10px;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.chip.sm{font-size:12px;padding:2px 8px}
+.layouts{margin-top:12px;border-top:1px solid var(--fg);padding-top:10px}
+.opt{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;width:100%;padding:9px 0;border-bottom:1px solid var(--hair)}
+.opt .dot{width:14px;height:14px;border:1.5px solid var(--fg);border-radius:50%;margin-top:3px}
+.opt[aria-pressed="true"] .dot{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 3px var(--bg)}
+.opt b{font-weight:700}.opt span{display:block;color:var(--mute);font-size:12.5px}
+.limit{margin-top:18px}
+.limit .big{display:flex;align-items:baseline;gap:8px}
+.limit .big input{width:5.5ch;border:0;border-bottom:2px solid var(--fg);background:transparent;font-weight:800;font-size:40px;letter-spacing:-.03em;padding:0;line-height:1.1;font-family:var(--sans);font-variant-numeric:tabular-nums;border-radius:0}
+.limit .big span{color:var(--mute);font-size:13px}
+input[type=range]{width:100%;accent-color:var(--accent);margin:12px 0 6px}
+
+#result{margin-top:56px;border-top:6px solid var(--fg);padding-top:14px}
+.rhead{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;align-items:end;margin-bottom:28px}
+.rhead h2{grid-column:span 8;margin:0;font-size:clamp(28px,4.4vw,56px);line-height:1;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
+.rhead .sub{grid-column:span 4;color:var(--mute);font-size:13px;text-align:right}
+.rgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px 24px}
+.map{grid-column:span 5;min-width:0}
+.sheet{grid-column:span 7;min-width:0}
+.mapbox{border:1px solid var(--fg);aspect-ratio:1/1;max-width:100%;position:relative;background:
+ linear-gradient(var(--hair) 1px,transparent 1px) 0 0/10% 10%,linear-gradient(90deg,var(--hair) 1px,transparent 1px) 0 0/10% 10%}
+.mapbox svg{position:absolute;inset:0;width:100%;height:100%}
+.mapnote{font-size:12px;color:var(--mute);margin:8px 0 0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:14px;border-top:1px solid var(--fg)}
+.stat{padding:8px 10px 8px 0}
+.stat b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em}
+.ppbar{margin:18px 0 6px;height:10px;background:var(--soft);position:relative}
+.ppbar i{position:absolute;left:0;top:0;bottom:0;background:var(--fg)}
+.ppbar u{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--accent)}
+.status{font-weight:700}
+.status.ok{color:var(--good)}.status.over{color:var(--accent)}
+.grp{margin-bottom:24px}
+.grp h3{margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:6px 0;border-top:2px solid var(--fg);display:flex;justify-content:space-between;gap:12px}
+.grp h3 span{color:var(--mute);font-weight:500;letter-spacing:.04em;text-transform:none;font-size:12px;text-align:right}
+table{width:100%;border-collapse:collapse}
+th,td{padding:7px 0;border-bottom:1px solid var(--hair);text-align:left;vertical-align:baseline}
+th{font-weight:500}
+td.v{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:12px;font-weight:500}
+td.h{color:var(--mute);font-size:12.5px;padding-left:16px;width:38%}
+th.c,td.c{text-align:right}
+.colh th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--fg)}
+.tablewrap{overflow-x:auto}
+.parts{margin-top:56px}
+.parts .pl{display:grid;grid-template-columns:44px minmax(0,1fr) 64px 56px 84px;gap:4px 14px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--hair)}
+.parts .pl.head{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--fg);padding:6px 0}
+.parts .pl .i{font-family:var(--mono);color:var(--mute)}
+.parts .pl .nm b{font-weight:700}
+.parts .pl .nm span{display:block;color:var(--mute);font-size:12.5px;max-width:68ch}
+.parts .pl .num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.parts .pl.skip{opacity:.45}
+.parts .pl.skip .nm b{text-decoration:line-through}
+.cost{letter-spacing:2px;color:var(--fg)}
+.cost s{text-decoration:none;color:var(--hair)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
+.startbar{margin-top:40px;border-top:2px solid var(--fg);padding-top:18px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between}
+.startbar .sum{min-width:0;flex:1 1 320px;font-size:14px;line-height:1.5}
+.startbar .sum b{font-weight:700}
+.startbar .sum .mute{color:var(--mute)}
+.btn.go{font-size:16px;padding:16px 28px;letter-spacing:.04em;text-transform:uppercase}
+.backbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.backbar .mini{border-bottom:1px solid var(--fg);padding:6px 0;font-size:13px;letter-spacing:.04em}
+.backbar .mini:hover{color:var(--accent)}
+.mapbox .wx{position:absolute;top:8px;right:8px;display:flex;align-items:center;gap:6px;padding:4px 8px 4px 6px;background:var(--bg);border:1px solid var(--fg);font-size:11px;letter-spacing:.06em;text-transform:uppercase;z-index:1}
+.mapbox .wx svg{position:static;width:22px;height:22px;flex:none}
+.gcount{margin-left:2px;font-size:11px;font-weight:500;letter-spacing:0}
+.gcount:empty{display:none}
+.ghead{display:flex;align-items:center;gap:14px;border-top:2px solid var(--fg);padding-top:14px;margin-bottom:20px}
+.ghead h2{margin:0;font-size:clamp(28px,4.4vw,56px);line-height:1;letter-spacing:-.03em;font-weight:800}
+.ghead .count{margin-left:auto;color:var(--mute);font-size:13px}
+.gico svg{width:clamp(30px,4vw,48px);height:clamp(30px,4vw,48px);fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linejoin:round;display:block}
+.glist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:0 24px}
+.gcard{border-top:1px solid var(--fg);padding:14px 0 18px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.gcard .gname{resize:none;field-sizing:content;min-height:1.2em;font-family:inherit;overflow:hidden;font-weight:700;font-size:18px;line-height:1.2;letter-spacing:-.01em;border:0;border-bottom:1px solid transparent;background:none;padding:2px 0;width:100%;color:var(--fg)}
+.gcard .gname:hover{border-bottom-color:var(--hair)}
+.gcard .gname:focus{border-bottom-color:var(--accent);outline:none}
+.gcard .gmeta{color:var(--mute);font-size:13px;line-height:1.5}
+.gcard .gmeta b{color:var(--fg);font-weight:500}
+.gcard .gbtns{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:6px;align-items:center}
+.gcard .gbtns button{font-size:13px;border-bottom:1px solid var(--fg);padding:3px 0}
+.gcard .gbtns button:hover{color:var(--accent);border-color:var(--accent)}
+.gcard .gbtns .open{font-weight:700}
+.gcard .gbtns .yes{color:var(--accent);border-color:var(--accent)}
+.gempty{border-top:1px solid var(--fg);padding:24px 0;color:var(--mute);max-width:52ch}
+.btn.ghost{background:none;color:var(--fg);border:1px solid var(--fg);padding:9px 17px}
+.btn.ghost:hover{background:var(--fg);color:var(--bg)}
+.btn.ghost svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round;vertical-align:-2px;margin-right:6px}
+.btn{background:var(--fg);color:var(--bg);padding:10px 18px;font-weight:700;letter-spacing:.02em}
+.btn:hover{background:var(--accent);color:var(--onaccent)}
+.fine{color:var(--mute);font-size:12.5px;max-width:78ch}
+footer{margin-top:64px;border-top:2px solid var(--fg);padding-top:12px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+footer p{grid-column:span 6;margin:0}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 16px}
+.fgrid label{display:block;min-width:0}
+.fgrid .field{margin-bottom:4px;font-size:14px}
+.fmeta{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin:4px 0 2px}
+.fmeta .mini{border-bottom:1px solid var(--fg);padding:2px 0;font-size:12px;letter-spacing:.04em}
+.fmeta .mini:hover{color:var(--accent)}
+.aerobox{margin-top:8px;padding-top:10px;border-top:1px solid var(--hair)}
+.aerobox .big{font-size:20px;font-weight:600;letter-spacing:-.01em}
+.aerobox .scale{position:relative;height:6px;background:var(--soft);margin:10px 0 4px}
+.aerobox .scale i{position:absolute;left:0;top:0;bottom:0;background:var(--fg)}
+.aerobox .scale u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--accent)}
+.aerobox .ends{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+.cond{margin-top:40px;border-top:2px solid var(--fg);padding-top:14px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px 20px;align-items:start}
+.cond .ph{grid-column:span 3;margin:0}
+.cond .fields{grid-column:span 9;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 24px}
+.cond label{display:block;min-width:0}
+.cond .ro{display:block;padding:8px 0;border-bottom:1px solid var(--hair)}
+.cond .rd{display:block;margin-top:2px;color:var(--mute);font-size:12px}
+.cond .row2{display:flex;gap:10px;align-items:flex-end}
+.cond .row2 .field{margin-bottom:0;min-width:0}
+.cond .mini{border-bottom:1px solid var(--fg);padding:8px 0;font-size:12px;white-space:nowrap;letter-spacing:.04em}
+.cond .mini:hover{color:var(--accent)}
+.field.num{font-family:var(--mono);font-size:20px;font-weight:500}
+.cond select:disabled{opacity:.45}
+.carpic{margin-top:18px;border-top:1px solid var(--fg);padding-top:10px}
+.carpic svg{display:block;width:100%;height:auto;max-height:170px}
+.carpic .cap{display:flex;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin-top:6px}
+.carpic .cap b{color:var(--fg);font-weight:700}
+.carpic a{color:var(--fg);text-underline-offset:3px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--fg)}
+.plan{padding:14px 18px 16px 0;border-right:1px solid var(--hair);min-width:0}
+.plan+.plan{padding-left:18px}
+.plan:last-child{border-right:0;padding-right:0}
+.plan h4{margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.plan .big{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:10px 0 2px}
+.plan .cmp{font-weight:700}
+.plan ul{margin:10px 0 0;padding:0;list-style:none}
+.plan li{padding:6px 0;border-top:1px solid var(--hair);font-size:13px}
+.plan li b{font-family:var(--mono);font-weight:500}
+.badge{background:var(--accent);color:var(--onaccent);padding:1px 6px;font-size:10px;letter-spacing:.08em;font-weight:700}
+.prof,.strat{margin-top:56px}
+.profgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px 24px;border-top:1px solid var(--fg);padding-top:14px}
+.profgrid>div{min-width:0}
+.pa{grid-column:span 5}.pb{grid-column:span 7}
+.rate{display:grid;grid-template-columns:110px 1fr 28px;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--hair);font-size:13px}
+.rate .mono{text-align:right}
+.bar{display:flex;gap:2px}.bar i{flex:1;height:8px;background:var(--soft)}.bar i.on{background:var(--fg)}
+.klist{margin:0;padding:0;list-style:none}
+.klist li{padding:8px 0;border-bottom:1px solid var(--hair)}
+.blurb{margin:0 0 14px;font-size:17px;line-height:1.4;letter-spacing:-.005em;max-width:60ch}
+@media (max-width:980px){
+  .cond .ph,.cond .fields{grid-column:1/-1}
+  .cond .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plans{grid-template-columns:1fr}
+  .plan,.plan+.plan{padding:14px 0;border-right:0;border-bottom:1px solid var(--hair)}
+  .pa,.pb{grid-column:1/-1}
+}
+.draw{stroke-dasharray:1;stroke-dashoffset:0;animation:draw 1.1s cubic-bezier(.3,.6,.2,1) both}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.draw{animation:none}.lapcar{display:none}}
+@media (max-width:980px){
+  .select{grid-template-columns:1fr}
+  .panel,.panel+.panel{padding:14px 0 22px;border-right:0;border-bottom:1px solid var(--hair)}
+  .map,.sheet{grid-column:1/-1}
+  .intro p,.intro p:first-child{grid-column:1/-1}
+  header .brand,header .meta{grid-column:1/-1;text-align:left}
+  header .meta{justify-content:space-between}
+  .setpanel{left:0;right:auto}
+  .rhead h2,.rhead .sub{grid-column:1/-1;text-align:left}
+  footer p{grid-column:1/-1}
+  .list{height:280px}
+}
+@media (max-width:560px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .parts .pl{grid-template-columns:30px minmax(0,1fr) 52px 70px}
+  .parts .pl .num.t{display:none}
+  td.h{display:none}
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">GT7 Setup Index</div>
+  <div class="meta"><span>Roster: update 1.71, plus 1.72 additions marked &middot; PlayStation 5</span>
+    <button class="setbtn" id="garbtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M6.5 20v-7.5h11V20"/><path d="M6.5 15h11M6.5 17.5h11"/></svg>Garage<span class="gcount mono" id="gcount"></span></button>
+    <div class="setwrap">
+      <button class="setbtn" id="setbtn" type="button" aria-expanded="false" aria-controls="setpanel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg>Settings</button>
+      <div class="setpanel" id="setpanel" hidden role="dialog" aria-label="Settings">
+        <div class="sgrp"><div class="lab">Speed</div><div class="seg" data-pref="speed"><button data-v="kph">km/h</button><button data-v="mph">mph</button></div></div>
+        <div class="sgrp"><div class="lab">Weight</div><div class="seg" data-pref="weight"><button data-v="kg">kg</button><button data-v="lb">lb</button></div></div>
+        <div class="sgrp"><div class="lab">Appearance</div><div class="seg" data-pref="theme"><button data-v="auto">Auto</button><button data-v="light">Light</button><button data-v="dark">Dark</button></div>
+          <p class="fine" id="themenote"></p></div>
+      </div>
+    </div></div>
+  <h1>Car, track, race. <em>Setup.</em></h1>
+</header>
+<div id="pickview">
+<div class="intro">
+  <p>Choose the car you own, the circuit you are about to run and the kind of race. The sheet returns tyres, suspension, aero, differential, gearing and brakes, then the parts to buy in order, fitted under your PP limit.</p>
+  <p>PP, drivetrain and track characteristics are working estimates. The tuning is a rule-based starting point for a first lap, then fine-tune by feel.</p>
+</div>
+
+<section class="select" aria-label="Selection">
+  <div class="panel" id="pcar">
+    <div class="ph"><div class="n">1</div><h2>Car</h2><div class="count mono" id="carcount"></div></div>
+    <input class="field" id="carq" type="search" placeholder="Search model, e.g. NSX, Gr.3, 1971" aria-label="Search cars" autocomplete="off">
+    <div class="fgrid">
+      <label><span class="lab">Country</span><select class="field" id="carcountry"></select></label>
+      <label><span class="lab">Manufacturer</span><select class="field" id="carmake"></select></label>
+      <label><span class="lab">Class</span><select class="field" id="carclass"></select></label>
+      <label><span class="lab">Era</span><select class="field" id="carera"></select></label>
+      <label><span class="lab">Body</span><select class="field" id="carbody"></select></label>
+      <label><span class="lab">Sort</span><select class="field" id="carsort"><option value="name">Name</option><option value="pp-desc">PP, high to low</option><option value="pp-asc">PP, low to high</option><option value="year-desc">Year, newest</option><option value="year-asc">Year, oldest</option></select></label>
+    </div>
+    <div class="lab" style="margin-top:8px">Drivetrain</div>
+    <div class="chips" id="dtchips" role="group" aria-label="Drivetrain"></div>
+    <div class="fmeta"><span class="fine">GT7 has Gr.1, Gr.3, Gr.4 and Gr.B. There is no Gr.2.</span><button class="mini" id="clearf" type="button">Clear filters</button></div>
+    <div class="list" id="carlist" role="list"></div>
+  </div>
+  <div class="panel" id="ptrack">
+    <div class="ph"><div class="n">2</div><h2>Track</h2><div class="count mono" id="trkcount"></div></div>
+    <input class="field" id="trkq" type="search" placeholder="Search circuit or country" aria-label="Search tracks" autocomplete="off">
+    <div class="chips" id="regions" role="group" aria-label="Region"></div>
+    <div class="lab" style="margin-top:8px">Surface</div>
+    <div class="chips" id="surfchips" role="group" aria-label="Surface"></div>
+    <div class="list" id="trklist" role="list" style="height:236px"></div>
+    <div class="layouts"><div class="lab">Layout</div><div class="chips" id="layouts"></div>
+      <div class="chips"><button class="chip sm" id="revbtn" aria-pressed="false">Reverse direction</button></div></div>
+  </div>
+  <div class="panel" id="prace">
+    <div class="ph"><div class="n">3</div><h2>Race</h2></div>
+    <div id="raceopts"></div>
+    <div class="limit">
+      <div class="lab">PP limit</div>
+      <div class="big"><input id="limnum" type="number" inputmode="numeric" min="100" max="1500" step="5" aria-label="PP limit"><span id="limlab">PP, no cap when empty</span></div>
+      <input id="limrange" type="range" min="100" max="1100" step="5" aria-label="PP limit slider">
+      <div class="chips" id="limchips"></div>
+    </div>
+  </div>
+</section>
+
+<section class="cond" aria-label="Race conditions">
+  <div class="ph"><div class="n">4</div><h2>Conditions</h2></div>
+  <div class="fields">
+    <label><span class="lab">Laps</span>
+      <span class="row2"><input class="field num" id="laps" type="number" inputmode="numeric" min="1" max="300" step="1" value="5"><button class="mini" id="lapauto" type="button">Auto</button></span>
+      <span class="rd" id="lapread"></span></label>
+    <label><span class="lab">Surface</span>
+      <span class="field ro" id="surfro"></span>
+      <span class="rd">Set by the track you picked</span></label>
+    <label><span class="lab">Weather</span>
+      <select class="field" id="wxsel"><option value="auto">Auto (from race type)</option><option value="clear">Clear</option><option value="cloud">Overcast</option><option value="rain">Light rain</option><option value="storm">Heavy rain</option></select>
+      <span class="rd" id="wxread"></span></label>
+    <label><span class="lab">Track condition</span>
+      <select class="field" id="condsel"><option value="auto">Auto (from weather)</option><option value="dry">Dry</option><option value="damp">Damp</option><option value="wet">Wet</option></select>
+      <span class="rd" id="condread"></span></label>
+    <label><span class="lab">Track temperature</span>
+      <select class="field" id="tempsel"><option value="auto">Auto (mild)</option><option value="cold">Cold, under 15 &deg;C</option><option value="mild">Mild, 15 to 25 &deg;C</option><option value="warm">Warm, 25 to 35 &deg;C</option><option value="hot">Hot, over 35 &deg;C</option></select>
+      <span class="rd" id="tempread"></span></label>
+    <label><span class="lab">Tyre compound</span>
+      <select class="field" id="tyresel"></select>
+      <span class="rd" id="tyread">Auto picks by race type</span></label>
+    <label><span class="lab">Fuel use rate</span>
+      <select class="field" id="fuelsel"><option value="1">x1 (normal)</option><option value="2">x2</option><option value="3">x3</option><option value="4">x4</option><option value="5">x5</option><option value="6">x6</option><option value="8">x8</option><option value="10">x10</option></select>
+      <span class="rd" id="fuelread"></span></label>
+    <label><span class="lab">Tyre wear rate</span>
+      <select class="field" id="wearsel"><option value="1">x1 (normal)</option><option value="2">x2</option><option value="3">x3</option><option value="4">x4</option><option value="5">x5</option><option value="6">x6</option><option value="8">x8</option><option value="10">x10</option></select>
+      <span class="rd" id="wearread"></span></label>
+  </div>
+</section>
+
+<div class="startbar">
+  <div class="sum" id="startsum"></div>
+  <button class="btn go" id="startbtn" type="button">Start tuning <span aria-hidden="true">&rarr;</span></button>
+</div>
+</div>
+
+<section id="result" aria-live="polite" hidden></section>
+
+<section id="garage" hidden aria-label="Garage">
+  <div class="backbar"><button class="mini" id="garback" type="button">&larr; Back</button><span class="fine" style="margin:0">Saved in this browser only</span></div>
+  <div class="ghead"><div class="gico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M6.5 20v-7.5h11V20"/><path d="M6.5 15h11M6.5 17.5h11"/></svg></div><h2>Garage</h2><div class="count mono" id="gtotal"></div></div>
+  <div class="glist" id="glist"></div>
+</section>
+
+<footer>
+  <p class="fine">Car roster follows the community master list (build 1.68, 575 cars) with the 1.72 cars confirmed by Polyphony Digital. Track list follows the in-game circuits, with Sportsland SUGO arriving 15 October 2026. Track outlines are schematic drawings of each circuit&rsquo;s general shape, not surveyed maps.</p>
+  <p class="fine">Not affiliated with Polyphony Digital or Sony Interactive Entertainment. Gran Turismo is a trademark of its owners. PP values are approximate stock figures and shift with game updates; check the Tuning Shop for the exact number before buying.</p>
+</footer>
+</div>
+
+<script>
+"use strict";
+/* ============ CAR DATA ============ */
+const RAW = `
+#Abarth|FR
+595 1970|RR|85
+500 2009|FF|393
+1500 Biposto Bertone B.A.T. 1 1952|240
+#Afeela|4WD
+Afeela Prototype 2024|580
+Afeela 1 2026|600
+#Alfa Romeo|FR
+155 2.5 V6 TI 1993|4WD|545
+4C 2014|MR|470
+4C Gr.3|MR|710
+4C Gr.3 Road Car|MR|520
+4C Gr.4|MR|580
+8C 2900B Lungo Berlinetta 1937|290
+8C Competizione 2008|488
+Giulia TZ2 Carrozzata da Zagato CN.AR750106 1965|RR|283
+Giulia Sprint GT Veloce 1967|205
+Giulia GTAm 2020|575
+MiTo 2009|FF|410
+#Alpine|MR
+A110 1972|RR|220
+A110 Premier Edition 2017|440
+A220 1968|420
+Vision Gran Turismo|840
+Vision Gran Turismo 2017|840
+Vision Gran Turismo Race Mode|920
+#AMG [Mercedes]|FR
+300 SEL 6.8 AMG 1971|350
+A45 AMG 2013|4WD|520
+AMG GT3 2016|700
+AMG GT3 2020|725
+AMG GT S 2015|585
+AMG GT S Safety Car|600
+AMG GT R 2017|650
+AMG GT Black Series 2020|680
+C63S Coupe 2015|575
+SLS AMG 2011|560
+SLS AMG Gr.4|585
+SLS AMG GT3 2011|650
+Vision Gran Turismo|880
+Vision Gran Turismo Racing Series|900
+#Amuse|FR
+NISMO 380RS SuperLeggera 2008|4WD|600
+S2000 GT1 Turbo 2005|610
+#Aston Martin|FR
+DB3S CN.1 1953|270
+DB5 1964|300
+DBR9 GT1 Race Car 2010|MR|640
+DB11 Coupe 2016|630
+DP100 Vision GT|MR|940
+One-77 2011|660
+V8 Vantage S 2015|550
+V8 Vantage Gr.4|575
+V12 Vantage Gr.3|700
+Valkyrie 2021|MR|790
+Vantage 2018|620
+Vulcan 2015|750
+#Audi|4WD
+e-tron Vision Gran Turismo|790
+R8 4.2 FSI V8 Quattro 2007|MR|555
+R8 Coupe V10 Plus 2016|MR|650
+R8 LMS Audi Sport Team WRT 2015|MR|705
+R8 GT3 LMS Evo 2019|MR|715
+R18 TDI (Audi Sport Team Joest) 2011|MR|880
+R18 e-tron 2016|MR|900
+RS5 Turbo DTM 2019|FR|700
+Sport quattro S1 1987|510
+TT Coupe 3.2 V6 2003|410
+TTS Coupe 2009|FF|420
+TTS Coupe 2014|480
+TT Cup 2016|FF|545
+Vision Gran Turismo|905
+#Autobianchi|FF
+A112 Abarth 1985|290
+#BAC|MR
+Mono 2011|585
+#BMW|FR
+3.0 CSL 1971|345
+3.0 CSL 1973|360
+i3 2015|RR|330
+M2 Competition 2018|540
+M3 1989|450
+M3 Sport Evolution 1989|480
+M3 1997|470
+M3 GT BMW Motorsport 2011|680
+M3 2003|515
+M3 2007|535
+M4 Coupe 2014|600
+M4 Gr.4|590
+M4 Safety Car|600
+M6 GT3 Endurance Model 2016|705
+M6 GT3 Sprint Model 2016|705
+M Hybrid V8 2025|MR|880
+McLaren F1 GTR Race Car 1997|MR|690
+Vision Gran Turismo|845
+Z4 3.0i 2003|450
+Z4 GT3 2011|680
+Z8 2001|520
+#Bugatti|4WD
+Chiron 2016|790
+Veyron 16.4 2013|760
+Veyron Gr.4|610
+Vision Gran Turismo|1010
+Vision Gran Turismo Gr.1|1050
+#Bulgari|4WD
+Aluminium Vision Gran Turismo|620
+#Caterham|FR
+Seven Superlight R500 2008|540
+#Chaparral|MR
+Chaparral 2J 1970|790
+Chaparral 2X Vision Gran Turismo 2014|1030
+#Chevrolet|FR
+Camaro Z28 1969|330
+Camaro Z28 1969 Race-Mod|480
+Camaro SS 2016|590
+Camaro ZL1 1LE 2018|650
+Chevelle SS 454 1970|345
+Corvette Stingray Concept 1959|305
+Corvette (C1) 1958|270
+Corvette (C2) Sting Ray Sport Coupe 1963|345
+Corvette (C3) Stingray Convertible 1969|335
+Corvette (C3) Stingray L46 350 1969|325
+Corvette (C4) ZR-1 1989|470
+Corvette (C5) Z06 2001|530
+Corvette (C6) ZR1 2009|620
+Corvette (C7) Stingray 2014|580
+Corvette (C7) ZR1 2019|660
+Corvette (C8) Stingray 2020|MR|600
+Corvette C7 Gr.3|715
+Corvette C7 Gr.3 Road Car|620
+Corvette C7 Gr.4|580
+Corvette CX Concept 2025|MR|760
+Corvette CX.R Vision Gran Turismo Concept|MR|960
+#Chris Holstrom Concepts|FR
+1967 Chevy Nova 2013|520
+#Citroen|FF
+DS21 Pallas 1970|170
+BX19 TRS 1987|180
+GT by Citroen|4WD|690
+GT by Citroen Gr.3|4WD|715
+GT by Citroen Gr.4|4WD|590
+#Daihatsu|FF
+Copen 2002|230
+Copen RJ Vision Gran Turismo 2017|FR|330
+#De Tomaso|MR
+Mangusta 1969|370
+Mangusta Christian Dior 1969|370
+Pantera 1971|400
+#DMC|RR
+Delorean DMC-12 2004|FR|235
+#Dodge|FR
+Challenger R/T 1970|420
+Challenger SRT Demon 2018|650
+Charger R/T 426 Hemi 1968|400
+Charger SRT Hellcat|650
+Charger SRT Hellcat Safety Car|650
+SRT Tomahawk GTS-R Vision Gran Turismo|MR|1000
+SRT Tomahawk S Vision Gran Turismo|MR|1000
+SRT Tomahawk Vision Gran Turismo Gr.1|MR|1050
+SRT Tomahawk X Vision Gran Turismo|MR|1090
+Super Bee 1970|420
+Viper Gr.4|590
+Viper GTS 2002|600
+Viper SRT-10 2006|635
+Viper GTS 2013|640
+Viper SRT GT3-R 2015|705
+#DS Automobile|FF
+DS3 Racing 2015|425
+#Eckert's Rod & Custom|FR
+Eckert Mach Forty 2012|525
+#Ferrari|MR
+250 GT Berlinetta passo corto CN.2521 1961|FR|340
+250 GTO CN.3729GT 1962|FR|375
+296 GT3 2022|743
+296 GTB 2022|700
+308 GTB 1976|370
+330 P4 1967|500
+365 GTB4 1971|FR|440
+458 Italia 2009|580
+458 Gr.4|585
+458 Gr.3|695
+499P 2023|920
+500 Mondial Pinin Farina Coupe 1954|FR|230
+512BB 1976|470
+812 Superfast 2017|FR|690
+Dino 246GT 1971|390
+Enzo Ferrari 2002|660
+F40 1992|640
+F430 2006|540
+F430 Scuderia 2007|565
+F50 1996|620
+F8 Tributo 2020|660
+F12berlinetta 2013|FR|665
+FXX K 2014|840
+GTO 1984|470
+La Ferrari 2013|770
+Testarossa 1991|510
+Vision Gran Turismo|1020
+#FIAT|FF
+500F 1968|RR|60
+500 1.2 Lounge 2008|230
+Panda 30 CL 1985|110
+#Ford|FR
+1932 Roadster 1963|380
+Escort RS Cosworth 1992|4WD|520
+F-150 SVT Raptor 2011|4WD|400
+Focus Gr.B Race Car|4WD|665
+Focus ST 2015|FF|480
+Focus RS 2018|4WD|520
+GT40 Mk1 1966|MR|490
+Mark IV Race Car 1967|MR|630
+GT 2006|MR|650
+GT LM Race Car Spec II|MR|790
+GT LM Spec II Test Car Gr.3|MR|730
+GT 2017|MR|700
+GT LM GTE 2018|MR|710
+Mustang Boss 429 1969|420
+Mustang Mach 1 1971|390
+Mustang GT 2015|555
+Mustang Gr.3|715
+Mustang Gr.3 Road Car|610
+Mustang Gr.4|585
+Mustang Gr.B|665
+Mustang Shelby GT350R 2016|590
+Sierra RS Cosworth RS500 1987|450
+Mustang 2015 American Racer|600
+#Garage RCR|FF
+Civic|610
+#Genesis|FR
+G70 3.3T AWD Performance Package 2022|4WD|520
+G70 GR4|585
+X GR3|715
+X Gran Berlinetta Vision Gran Turismo|MR|900
+X Gran Racer Vision Gran Turismo Concept|4WD|900
+#Gran Turismo|MR
+F1500T-A|760
+F3500-A|860
+F3500-B|860
+Racing Kart 125 Shifter|RR|140
+Red Bull X2014 Junior 2014|1050
+Red Bull X2014 Standard 2014|1090
+Red Bull X2019 Competition 2019|1110
+#Greddy|FR
+Fugu Z 2015|630
+#Greening Auto Company|FR
+1971 Maverick 2018|520
+#Honda|FF
+Beat 1991|MR|230
+Civic (EF) Si Extra 1987|215
+Civic (EG) SiR-II 1993|300
+Civic (EK9) Type R 1997|420
+Civic (EK9) Type R Touring Car 1997|520
+Civic (EK9) Type R 1998|425
+Civic (FK2) Type R 2016|560
+Civic (FK8) Type R 2020|550
+Civic (FL5) Type R 2022|575
+CR-V e:HEV EX Black Edition 2021|4WD|330
+Fit Hybrid 2014|235
+Integra DC2 Type R 1995|430
+Integra DC2 Type R 1998|435
+N-ONE RS 2022|215
+NSX Type R 1992|MR|510
+NSX Type R 2002|MR|555
+NSX GT500 2000|MR|720
+NSX Epson Super GT 2008|MR|700
+NSX Concept-GT Raybrig Super GT 2016|MR|780
+NSX 2017|4WD|640
+NSX Gr.3 Race Car|4WD|705
+NSX Gr.4 Race Car|4WD|580
+NSX Gr.B Race Car|4WD|665
+Project 2&4 powered by RC213V 2015|MR|600
+RA272 1965|MR|330
+S660 2015|MR|300
+S800 1966|FR|105
+S2000 1999|FR|485
+Sports Vision Gran Turismo|4WD|810
+#Hyundai|FF
+Elantra N 2023|470
+Elantra N TC 2024|560
+Genesis Coupe 3.8 2013|FR|480
+Genesis Gr.3|FR|700
+Genesis Gr.4|FR|580
+Genesis Gr.B|4WD|665
+Ioniq 5N 2024|4WD|620
+Ioniq 6N 2025|4WD|640
+N2025 Vision GT|MR|980
+N2025 Vision GT Gr.1|MR|1040
+#Infiniti|FR
+Concept Vision Gran Turismo 2014|790
+#ItalDesign|4WD
+Exeneo Vision Gran Turismo Offroad Mode|790
+Exeneo Vision Gran Turismo Street Mode|870
+#Jaguar|FR
+D-Type 1954|355
+E-Type Coupe 1961|290
+F-Type Coupe 2014|590
+F-Type Gr.3|705
+F-Type Gr.4|585
+Vision GT 2019|4WD|870
+Vision GT SV 2021|4WD|970
+Vision GT Roadster|4WD|880
+XJ13 1966|MR|470
+XJ220 1992|4WD|570
+XJR-9 1988|MR|740
+#Jeep|4WD
+Willys MB 1945|50
+#KTM|MR
+X-Bow R 2012|490
+#Lamborghini|4WD
+Aventador LP700-4 2011|690
+Aventador LP750-4 SV 2015|720
+Countach LP400 1974|MR|420
+Countach 25th Anniversary 1988|MR|500
+Diablo GT 1999|MR|570
+Gallardo LP560-4 2008|580
+Huracan GT3 2015|MR|715
+Huracan Gr.4|MR|590
+Huracan LP610-4 2015|640
+"Lambo V12" Vision GT 2019|MR|1010
+Miura P400 Bertone Prototype CN.0706 1967|MR|380
+Murcielago LP640 2009|650
+Urus 2018|610
+Veneno 2013|790
+#Lancia|4WD
+Stratos 1973|MR|420
+Delta HF Integrale Evoluzione 1991|405
+Delta HF Integrale Rally Car 1992|500
+#Lexus|FR
+LC500 2017|620
+LF-LC GT Vision Gran Turismo|800
+LFA 2010|650
+RC F 2014|580
+RC F au TOM'S Super GT 2016|760
+RC F Emil Frey Racing 2017|705
+RC F Gr.4|585
+RC F GT3 Prototype Emil Frey Racing 2016|700
+SC430 Petronas Tom's Super GT 2008|710
+#Maserati|FR
+A6GCS/53 Spyder 1954|230
+Gran Turismo S 2008|520
+MC20 2020|MR|660
+Merak SS 1980|MR|330
+#Mazda|FR
+3 Gr.4|FF|575
+3 X Burgundy Selection 2019|FF|400
+787B 1991|MR|790
+Atenza Sedan XD 2015|FF|370
+Atenza Gr.4|FF|580
+Atenza Gr.3|FF|700
+Atenza Gr.3 Road Car|FF|580
+CX-30 X Smart Edition 2021|FF|360
+Demio XD Touring 2015|FF|265
+Eunos Roadster NA 1989|330
+LM55 Vision GT|4WD|960
+LM55 Vision GT Gr.1|4WD|1040
+Roadster (NA) Touring Car 1991|470
+Roadster (ND) S 2015|425
+Roadster (ND) NR-A 2022|450
+Roadster (ND) Spirit Racing 12R 2025|510
+RX500 1970|MR|470
+RX-7 FC GT-X 1990|480
+RX-7 FD Type R 1991|550
+RX-7 FD Spirit R 2002|535
+RX-8 Spirit R 2012|500
+RX-Vision Concept 2016|590
+RX-Vision GT3 Concept 2020|705
+RX-Vision GT3 Concept Stealth Model 2020|705
+#McLaren|MR
+650S 2014|630
+650S Gr.4|590
+650S GT3 2015|700
+F1 1994|650
+F1 GTR Kokusai Kaihatsu 1995|690
+MP4/4 1988|900
+MP4-12c 2010|590
+P1 GTR 2016|790
+Ultimate Vision GT|1060
+Ultimate Vision GT Gr.1|1100
+#Mercedes|FR
+190E 2.5-16 Evolution II 1991|420
+300SL W194 1952|290
+300 SL Coupe 1954|260
+CLK LM 1998|MR|700
+S Barker Tourer 1929|95
+Sauber C9 1989|MR|830
+SLR McLaren 2009|630
+Unimog Type 411 1962|4WD|35
+W196R Monoposto 1955|330
+#Mine's|4WD
+BNR34 GT-R N1 Base 2000|635
+#MINI|FF
+Clubman VGT|4WD|830
+Cooper S 1965|130
+Cooper S 2005|340
+#Mitsubishi|4WD
+FTO GP Version R Aero 1997|FF|395
+GTO Twin Turbo 1991|510
+Lancer Evolution III GSR 1995|440
+Lancer Evolution IV 1996|470
+Lancer Evolution V GSR 1998|480
+Lancer Evolution VI Tommi Makinen Edition 1999|490
+Lancer Evolution VIII GSR MR 2004|520
+Lancer Evolution IX GSR MR 2006|535
+Lancer Evo X Final Edition 2015|555
+Lancer Evo X Final Edition Gr.3|705
+Lancer Evo X Final Edition Gr.4|585
+Lancer Evo X Final Edition Gr.B|665
+Lancer Evo X Final Edition Gr.B Road Car|580
+XR-PHEV Evolution Vision Gran Turismo|790
+#NISMO|4WD
+400R 1995|580
+R34 Z-Tune 2005|700
+#Nissan|FR
+180SX Type X 1996|440
+Concept 2020 Vision Gran Turismo|4WD|940
+Fairlady Z (S30) 240ZG 1971|300
+Fairlady Z (S30) Z432 1970|310
+Fairlady Z (Z32) 300ZX TwinTurbo 2seater 1989|490
+Fairlady Z (Z33) Version S 2007|470
+Fairlady Z (Z34) 2008|505
+GT-R Xanavi Nismo GT-R 2008|4WD|650
+GT-R (R35) 2017|4WD|620
+GT-R (R35) Gr.4|4WD|590
+GT-R (R35) Gr.B|4WD|665
+GT-R (R35) Safety Car|4WD|620
+GT-R (R35) Nismo 2017|4WD|650
+GT-R (R35) Premium Edition T-Spec '24|4WD|640
+GT-R Nismo GT3 N24 Schulze Motorsport 2013|4WD|690
+GT-R Nismo GT3 2018|4WD|710
+GT-R LM NISMO 2015|FF|840
+GT-R (R35) Motul Super GT 2016|FR|780
+Qashqai Tekna e-Power 2022|FF|310
+R92CP 1992|MR|820
+SilEighty 1998|480
+Silvia S13 Qs 1988|370
+Silvia S13 Ks Dia Selection 1990|400
+Silvia S14 Ks Type S 1994|430
+Silvia S14 Ks Aero 1996|450
+Silvia S15 Spec R Aero 2002|485
+Silvia S15 Touring Car Gr.4|575
+Skyline KPGC10 GT-R 1971|340
+Skyline KPGC110 GT-R 1973|360
+Skyline R30 Super Silhouette Group 5 1984|650
+Skyline R31 GTS-R 1987|395
+Skyline R32 GT-R NISMO 1990|4WD|520
+Skyline R32 GT-R V-Spec II 1994|4WD|500
+Skyline R33 GT-R V-Spec 1997|4WD|520
+Skyline R34 GT-R V-Spec Nur 2002|4WD|555
+Skyline R34 GT-R GT500 1999|FR|725
+Skyline GT-R GP-Tuned (KPGC10)|390
+Z Performance 2023|570
+#Opel|FF
+Corsa GSE Vision Gran Turismo|740
+#Pagani|MR
+Huayra 2013|740
+Zonda R 2009|780
+#Peugeot|FF
+205 GTI 1988|285
+205 T16 Evolution II Rally Car 1986|4WD|520
+208 GTI by Peugeot Sport 2014|395
+2008 Allure 2021|250
+908 HDI FAP 2010|MR|810
+9X8 2025|4WD|920
+L500R HYbrid Vision Gran Turismo|MR|960
+L750R HYbrid Vision Gran Turismo|MR|980
+RCZ 2015|470
+RCZ Gr.3|700
+RCZ Gr.3 Road Car|580
+RCZ Gr.4|575
+RCZ Gr.B|4WD|665
+Vision Gran Turismo|MR|880
+Vision Gran Turismo Gr.3|MR|740
+#Plymouth|FR
+Superbird 1970|420
+XNR Ghia Roadster 1960|330
+#Polestar|4WD
+5 Performance 2026|690
+#Pontiac|FR
+Firebird Trans Am 1978|300
+GTO The Judge 1969|370
+#Porsche|RR
+356 A/1500 GS Carrera 1956|165
+356 A/1500 GS GT Carrera Speedster 1956|170
+911 Carrera 2.7 RS 1973|320
+911 930 Turbo 1981|430
+911 964 Carrera RS 1992|465
+911 964 Turbo S Leichtbau 1993|540
+911 993 Carrera RS 1995|490
+911 993 Carrera RS CS 1995|500
+911 996 GT3 2001|520
+911 996 GT1 Strassenversion 1997|MR|640
+911 997.2 GT3 RS 2009|570
+911 991 GT3 RS 2016|620
+911 991 RSR 2017|MR|715
+911 992 GT3 RS 2022|660
+911 992 GT3 R 2022|730
+911 992 Turbo S 2020|4WD|690
+911 992 Turbo S Safety Car|4WD|690
+911 Turbo Rally (930)|4WD|470
+917K 1970|MR|690
+917 Living Legend 2013|MR|900
+918 Spyder 2013|4WD|720
+919 Hybrid 2016|MR|930
+959 1987|4WD|580
+962 C 1988|MR|830
+963 2024|MR|910
+Carrera GT 2003|MR|620
+Carrera GTS (904) 1964|MR|290
+Cayman GT4 2016|MR|550
+Cayman GT4 Clubsport 2016|MR|570
+Mission X Concept 2023|MR|800
+Spyder Type 550/1500 RS 1955|MR|205
+Taycan Turbo S 2019|4WD|620
+Vision Gran Turismo|MR|880
+Vision Gran Turismo Spyder|MR|900
+#Radical|MR
+SR3 SL 2011|630
+#Roadster Shop|FR
+Rampage|720
+#RE Amemiya|FR
+RE Amemiya FD3S RX-7 2004|590
+#Renault|FF
+5 Turbo 1981|MR|345
+Avantime 3.0 V6 24v 2002|300
+Captur S Edition TCe 140 2021|265
+Clio V6 24v 2000|MR|420
+Clio R.S. 220 EDC Trophy 2015|425
+Clio R.S. 220 EDC Trophy 2016|430
+Espace F1 1995|MR|700
+Kangoo 1.4 2001|130
+Megane Gr.4|585
+Megane RS Trophy 2011|450
+Megane RS Trophy Safety Car|450
+Megane Trophy V6 2011|MR|680
+R4 GTL 1985|105
+R8 Gordini 1966|RR|120
+R.S.01 2016|MR|715
+R.S.01 GT3 2016|MR|715
+Twingo 1993|140
+#Ruf|MR
+CTR3 2007|600
+RGT 4.2 2016|RR|545
+#Shelby|FR
+Cobra 427 1966|480
+Cobra Daytona 1965|395
+GT350 1965|330
+#Skoda|4WD
+Vision Gran Turismo 2024|780
+#Subaru|4WD
+BRZ S 2015|FR|420
+BRZ STI Sport 2018|FR|435
+BRZ S 2021|FR|455
+BRZ GT300 2021|FR|640
+Falken Tires/Turn 14 Distribution BRZ 2017|FR|610
+Impreza Coupe WRX Type R 1999|400
+Impreza 22B 1998|450
+Impreza WRC 1998|510
+Impreza WRX STI 2004|470
+WRX STI Type S 2014|520
+WRX Gr.B Race Car|665
+WRX Gr.B Road Car|580
+WRX STI Gr.3 Race Car|705
+WRX STI Gr.4 Race Car|585
+WRX STI Isle of Man Time Attack Car 2016|820
+VIZIV GT Vision Gran Turismo|890
+#Super Formula|MR
+SF19 Dallara/Honda 2019|1040
+SF19 Dallara/Toyota 2019|1040
+SF23 Dallara/Honda 2023|1060
+SF23 Dallara/Toyota 2023|1060
+#Suzuki|FF
+Cappuccino 1991|FR|220
+Carry KC 2012|FR|110
+Jimny Sierra JC 2018|4WD|230
+Jimny XC 2018|4WD|225
+Swift Sport 2007|315
+Swift Sport 2017|350
+Swift Sport Gr.4|FF|560
+V6 Escudo Pikes Peak Special 1998|4WD|760
+Vision Gran Turismo|4WD|800
+Vision Gran Turismo Gr.3|4WD|730
+#Tesla|4WD
+Model 3 Performance 2023|520
+Model S Performance 2012|RR|450
+#Toyota|FR
+2000GT 1967|290
+86 GT 2015|FR|430
+86 GRMN 2016|FR|470
+86 GT "Limited" 2016|FR|440
+86 Gr.4|FR|575
+86 Gr.B|FR|665
+AE86 Levin D-Tuned|480
+Alphard Executive Lounge 2018|FF|250
+Ambulance Himedic 2021|FR|220
+Aqua S 2011|FF|230
+C-HR S 2018|FF|290
+Celica GT-Four (ST205) 1995|4WD|430
+Celica GT-Four (ST205) Rally Car 1995|4WD|530
+Chaser Tourer V 1997|FR|420
+Corolla Levin AE86 1983|FR|300
+Crown Athlete G 2013|FR|380
+Crown Athlete G Safety Car 2013|FR|390
+FT-1 2014|FR|790
+FT-1 Vision Gran Turismo|FR|900
+FT-1 Vision Gran Turismo Gr.3|FR|730
+GR010 Hybrid 2021|4WD|900
+GR 86 RZ 2021|FR|460
+GR Corolla Morizo Edition 2022|4WD|540
+GR Supra (A90) 2019|FR|560
+GR Supra (A90) 2020|FR|575
+GR Supra (A90) Gr.4|FR|585
+GR Supra Racing Concept 2018|FR|620
+GR Yaris 2020|4WD|470
+GT-One 1999|MR|830
+HiAce Van DX 2016|FR|160
+Land Cruiser FJ40V 1974|4WD|85
+Mark II Tourer V 1997|FR|430
+MR2 (W20) GT-S 1997|MR|390
+Prius G 2009|FF|215
+RAV4 Adventure 2020|4WD|290
+SF-R 2015|MR|870
+SF-R Racing Concept 2015|MR|890
+Sports 800 1965|FR|105
+Sprinter Trueno AE86 1983|FR|300
+Sprinter Trueno Shuichi Shigeno Edition 2000|FR|315
+Supra GT500 1997|FR|740
+Supra GT Road Car (JZA80)|FR|520
+Supra (A70) 1992|FR|400
+Supra RZ (A80) 1997|FR|505
+TS030 Hybrid 2012|MR|850
+TS050 Hybrid 2016|4WD|930
+Tundra TRD Pro 2019|4WD|290
+#TVR|FR
+Tuscan Speed Six 2000|550
+#Volkswagen|FF
+1200 1966|RR|75
+Beetle Gr.3|RR|700
+Beetle 1966 Desert Racer|RR|365
+Golf I GTI 1983|230
+Golf VII GTI 2014|430
+GTI Roadster Vision GT|4WD|780
+GTI Supersport Vision GT|4WD|810
+GTI Vision Gran Turismo Gr.3|4WD|735
+ID.R 2019|4WD|1050
+Polo GTI 2014|355
+Samba Bus Type 2 (T1) 1962|RR|60
+Scirocco Gr.4|FF|570
+Scirocco R 2010|395
+#Volvo|FF
+240 SE Estate 1993|FR|165
+V40 T5 R-Design 2013|400
+#Wicked Fabrication|FR
+GT 51 2016|650
+#Xiaomi|4WD
+SU7 Ultra 2025|720
+Xiaomi Vision Gran Turismo|910|new
+#Yangwang|4WD
+U9 2024|800
+#Zagato|FR
+Zagato IsoRivolta Vision Gran Turismo|760
+#Citroen|FF
+2 CV 6 Charleston 1986|85|new
+#Ferrari|MR
+F355 Berlinetta 1994|490|new
+#Honda|FF
+Civic Si Group A Version 1987|480|new
+Step WGN Spada Premium Line 2023|300|new
+#Mazda|FR
+RX-Vision GT3 Evo 2026|740|new
+`;
+
+const RACE_RX=/Gr\.|Race Car|GT3|GTE|GT1|Touring Car|Super GT|GT500|Formula|SF19|SF23|F3500|F1500|R18|TS0|GR010|9X8|499P|M Hybrid|\b963\b|919|\b962|917|C9\b|R92CP|787B|ID\.R|RA272|MP4\/4|XJR-9|Kart|Red Bull X|Group 5|Group A|Time Attack|Pikes Peak|DTM|Isle of Man|GT300|Racing Concept|GT LM|GT-One|W196R|Sauber|Rally Car|Kokusai|Chaparral 2J|XJ13|330 P4|Mark IV|DBR9|Epson|Raybrig|Safety Car|Project 2&4|Motul|Petronas/;
+const VGT_RX=/Vision Gran Turismo|Vision GT|VGT|Exeneo/;
+function parseCars(txt){
+  const out=[];let make="",ddt="FR",id=0;
+  txt.split("\n").forEach(l=>{
+    l=l.trim();if(!l)return;
+    if(l[0]==="#"){const p=l.slice(1).split("|");make=p[0];ddt=p[1];return}
+    const p=l.split("|");const name=p[0];let dt=ddt,pp,isNew=false;
+    const rest=p.slice(1);
+    rest.forEach(x=>{
+      if(x==="new")isNew=true;
+      else if(/^\d+$/.test(x))pp=+x;
+      else if(/^(FR|MR|RR|FF|4WD)$/.test(x))dt=x;
+    });
+    const ym=name.match(/\b(19\d{2}|20\d{2})\b/);
+    const year=ym?+ym[1]:null;
+    const full=make.replace(" [Mercedes]","")+" "+name;
+    const vgt=VGT_RX.test(name);
+    const grm=name.match(/Gr\.(1|3|4|B)/);
+    let cat;
+    if(grm)cat="Gr."+grm[1];
+    else if(vgt)cat="Vision GT";
+    else cat="N"+(Math.min(10,Math.ceil(pp/100))*100);
+    const isRace=!!grm||vgt||RACE_RX.test(name);
+    out.push({id:id++,make:make.replace(" [Mercedes]",""),name,full,dt,pp,year,cat,isRace,vgt,isNew});
+  });
+  return out;
+}
+const CARS=parseCars(RAW).sort((a,b)=>a.make.localeCompare(b.make)||a.name.localeCompare(b.name));
+
+/* ============ TRACK DATA ============ */
+function rng(s){return()=>{s=Math.imul(s^s>>>15,1|s);s^=s+Math.imul(s^s>>>7,61|s);return((s^s>>>14)>>>0)/4294967296}}
+function gen(seed,n=14,ar=1.3,wig=.38){
+  const r=rng(seed),p=[];
+  for(let i=0;i<n;i++){const a=i/n*2*Math.PI,rad=1-wig*r()*(i%2?1:.55);
+    p.push([50+44*Math.cos(a)*rad,50+44/ar*Math.sin(a)*rad])}
+  return p}
+const OVAL=[[10,66],[50,72],[90,66],[95,50],[90,34],[50,28],[10,34],[5,50]];
+const L=(n,len,o)=>Object.assign({n,len:len||null},o||{});
+const TRACKS=[
+ // Americas
+ {id:"bluemoon",name:"Blue Moon Bay Speedway",c:"USA",reg:"Americas",surf:"tarmac",fict:1,hs:.8,tech:.3,bump:.1,vmax:330,pts:[[8,60],[50,68],[92,60],[96,46],[88,34],[66,36],[56,48],[44,36],[30,38],[10,34],[4,48]],
+   lay:[L("Full Course"),L("Infield A",null,{cut:[5,9]}),L("Infield B",null,{cut:[3,9]})]},
+ {id:"trial",name:"Trial Mountain Circuit",c:"USA",reg:"Americas",surf:"tarmac",fict:1,hs:.4,tech:.6,bump:.35,vmax:250,pts:gen(11,16,1.25,.45),lay:[L("Full Course")]},
+ {id:"colorado",name:"Colorado Springs",c:"USA",reg:"Americas",surf:"tarmac",fict:1,hs:.4,tech:.6,bump:.4,vmax:240,pts:gen(21,14,1.5,.42),lay:[L("Lake")]},
+ {id:"laguna",name:"Laguna Seca",c:"USA",reg:"Americas",surf:"tarmac",hs:.3,tech:.75,bump:.5,vmax:230,pts:[[18,72],[40,76],[64,70],[80,56],[70,42],[56,48],[44,38],[28,30],[16,44],[12,58]],lay:[L("Full Course",3.6)]},
+ {id:"willow",name:"Willow Springs International Raceway",c:"USA",reg:"Americas",surf:"tarmac",hs:.65,tech:.45,bump:.45,vmax:280,pts:[[10,60],[40,72],[72,66],[90,52],[84,36],[60,30],[40,40],[24,34],[12,44]],
+   lay:[L("Big Willow"),L("Streets of Willow Springs",null,{cut:[2,7],hs:.3,tech:.7,vmax:210}),L("Horse Thief Mile",null,{cut:[3,6],hs:.6,vmax:250})]},
+ {id:"northern",name:"Northern Isle Speedway",c:"USA",reg:"Americas",surf:"tarmac",fict:1,hs:.95,tech:.05,bump:.1,vmax:330,pts:OVAL,lay:[L("Oval")]},
+ {id:"routex",name:"Special Stage Route X",c:"USA",reg:"Americas",surf:"tarmac",fict:1,hs:1,tech:.1,bump:.15,vmax:340,pts:[[8,70],[50,76],[92,70],[96,50],[92,30],[50,24],[8,30],[4,50]],lay:[L("Full Course")]},
+ {id:"fisher",name:"Fisherman's Ranch",c:"USA",reg:"Americas",surf:"dirt",fict:1,hs:.35,tech:.5,bump:.85,vmax:160,pts:gen(31,12,1.4,.4),lay:[L("Dirt Course")]},
+ {id:"daytona",name:"Daytona International Speedway",c:"USA",reg:"Americas",surf:"tarmac",hs:.95,tech:.1,bump:.1,vmax:320,pts:OVAL,
+   lay:[L("Tri-Oval",4.02),L("Road Course",5.73,{hs:.7,tech:.5,vmax:300,pts:[[8,60],[40,68],[70,64],[92,54],[88,38],[68,32],[56,42],[42,34],[24,40],[12,34],[6,46]]})]},
+ {id:"interlagos",name:"Autódromo de Interlagos",c:"Brazil",reg:"Americas",surf:"tarmac",hs:.5,tech:.65,bump:.35,vmax:290,pts:[[18,30],[60,24],[82,38],[84,56],[66,66],[50,60],[40,72],[22,74],[12,56],[14,42]],lay:[L("Full Course",4.31)]},
+ {id:"grandvalley",name:"Grand Valley Highway 1",c:"USA",reg:"Americas",surf:"tarmac",fict:1,hs:.85,tech:.35,bump:.3,vmax:320,pts:gen(41,16,1.7,.38),
+   lay:[L("Highway 1 +",5.1),L("South",3.08,{cut:[3,11],hs:.7,tech:.4,vmax:280})]},
+ {id:"lakelouise",name:"Lake Louise",c:"Canada",reg:"Americas",surf:"snow",fict:1,hs:.35,tech:.5,bump:.5,vmax:200,pts:gen(51,14,1.35,.4),
+   lay:[L("Long Track",3.7),L("Short Track",2.57,{cut:[4,10]}),L("Tri-Oval",3.07,{pts:[[8,62],[50,70],[92,62],[94,40],[60,30],[28,32],[6,42]]})]},
+ {id:"villeneuve",name:"Circuit Gilles-Villeneuve",c:"Canada",reg:"Americas",surf:"tarmac",hs:.75,tech:.5,bump:.25,vmax:320,pts:[[10,50],[24,36],[44,38],[60,28],[84,26],[88,40],[72,50],[88,62],[70,72],[40,66],[22,62]],lay:[L("Full Course",4.36)]},
+ // Europe
+ {id:"brands",name:"Brands Hatch",c:"UK",reg:"Europe",surf:"tarmac",hs:.35,tech:.75,bump:.45,vmax:240,pts:[[14,64],[28,70],[42,60],[50,44],[40,34],[54,22],[70,28],[84,44],[78,60],[60,72],[36,80]],
+   lay:[L("Grand Prix Circuit",3.92),L("Indy Circuit",1.93,{cut:[3,6],vmax:200})]},
+ {id:"goodwood",name:"Goodwood Motor Circuit",c:"UK",reg:"Europe",surf:"tarmac",hs:.6,tech:.45,bump:.4,vmax:250,pts:[[16,72],[50,76],[80,68],[88,48],[76,30],[48,24],[22,30],[10,50]],lay:[L("Full Course",3.8)]},
+ {id:"spa",name:"Circuit de Spa-Francorchamps",c:"Belgium",reg:"Europe",surf:"tarmac",hs:.85,tech:.55,bump:.35,vmax:320,pts:[[10,62],[26,70],[40,60],[56,70],[74,62],[90,50],[84,34],[66,26],[52,16],[36,22],[22,36],[12,50]],lay:[L("Full Course",7.0)]},
+ {id:"nurb",name:"Nürburgring",c:"Germany",reg:"Europe",surf:"tarmac",hs:.6,tech:.75,bump:.5,vmax:300,pts:gen(61,34,2.4,.55),
+   lay:[L("Nordschleife",20.83,{tech:.85,bump:.7}),L("24h Layout",25.38,{tech:.8,bump:.65}),L("Grand Prix Track",5.15,{hs:.6,tech:.6,bump:.3,vmax:280,pts:[[14,70],[34,76],[52,70],[66,76],[84,66],[88,48],[76,38],[60,42],[48,32],[34,36],[22,26],[12,40]]})]},
+ {id:"lemans",name:"24 Heures du Mans Racing Circuit",c:"France",reg:"Europe",surf:"tarmac",hs:1,tech:.3,bump:.3,vmax:350,pts:[[10,58],[18,68],[32,68],[46,62],[90,32],[94,24],[86,20],[74,28],[44,50],[30,48],[22,44],[12,46]],
+   lay:[L("Full Course",13.63),L("No Chicane",13.6,{vmax:380})]},
+ {id:"alsace",name:"Alsace",c:"France",reg:"Europe",surf:"tarmac",fict:1,hs:.3,tech:.8,bump:.6,vmax:220,pts:gen(71,18,1.3,.5),
+   lay:[L("Village"),L("Test Course",null,{cut:[4,13],hs:.5,tech:.6,vmax:260})]},
+ {id:"saintecroix",name:"Circuit de Sainte-Croix",c:"France",reg:"Europe",surf:"tarmac",fict:1,hs:.5,tech:.6,bump:.3,vmax:280,pts:gen(81,16,1.5,.4),
+   lay:[L("Layout A"),L("Layout B",null,{cut:[2,11]}),L("Layout C",null,{cut:[6,14]})]},
+ {id:"maggiore",name:"Autodrome Lago Maggiore",c:"Italy",reg:"Europe",surf:"tarmac",fict:1,hs:.55,tech:.7,bump:.3,vmax:270,pts:gen(91,20,1.45,.4),
+   lay:[L("Full Course"),L("Centre",null,{cut:[3,12]}),L("East End",null,{cut:[2,9]}),L("West End",null,{cut:[10,17]}),L("East",null,{cut:[5,14]}),L("West",null,{cut:[1,8]})]},
+ {id:"monza",name:"Autodromo Nazionale Monza",c:"Italy",reg:"Europe",surf:"tarmac",hs:1,tech:.3,bump:.2,vmax:350,pts:[[14,72],[62,74],[80,70],[90,56],[84,40],[70,30],[56,34],[46,24],[34,20],[22,28],[24,42],[36,52],[28,60]],
+   lay:[L("Full Course",5.79),L("No Chicane",5.76,{vmax:360})]},
+ {id:"sardroad",name:"Sardegna – Road Track",c:"Italy",reg:"Europe",surf:"tarmac",fict:1,hs:.4,tech:.75,bump:.6,vmax:230,pts:gen(101,16,1.35,.5),
+   lay:[L("Layout A"),L("Layout B",null,{cut:[3,12]}),L("Layout C",null,{cut:[7,15]})]},
+ {id:"sardwind",name:"Sardegna – Windmills",c:"Italy",reg:"Europe",surf:"dirt",fict:1,hs:.3,tech:.6,bump:.85,vmax:150,pts:gen(111,14,1.3,.45),lay:[L("Dirt Course")]},
+ {id:"deepforest",name:"Deep Forest Raceway",c:"Switzerland",reg:"Europe",surf:"tarmac",fict:1,hs:.45,tech:.6,bump:.4,vmax:250,pts:gen(121,15,1.4,.42),lay:[L("Full Course")]},
+ {id:"redbull",name:"Red Bull Ring",c:"Austria",reg:"Europe",surf:"tarmac",hs:.8,tech:.4,bump:.25,vmax:300,pts:[[14,70],[22,40],[40,24],[66,22],[88,34],[92,56],[76,72],[56,66],[40,76],[28,76]],
+   lay:[L("Full Course",4.32),L("Short Track",null,{cut:[2,7],vmax:230})]},
+ {id:"barcelona",name:"Circuit de Barcelona-Catalunya",c:"Spain",reg:"Europe",surf:"tarmac",hs:.7,tech:.55,bump:.25,vmax:310,pts:[[14,58],[40,62],[70,56],[84,42],[76,28],[58,32],[46,22],[30,26],[24,40],[34,48],[18,48]],lay:[L("Grand Prix",4.66)]},
+ {id:"dragon",name:"Dragon Trail",c:"Croatia",reg:"Europe",surf:"tarmac",fict:1,hs:.45,tech:.6,bump:.4,vmax:250,pts:gen(131,17,1.6,.42),
+   lay:[L("Seaside"),L("Gardens",null,{cut:[3,11]})]},
+ {id:"eiger",name:"Eiger Nordwand",c:"Switzerland",reg:"Europe",surf:"tarmac",fict:1,hs:.4,tech:.65,bump:.5,vmax:220,pts:gen(141,12,1.2,.45),lay:[L("Full Course",2.44)]},
+ // Asia–Oceania
+ {id:"hsr",name:"High Speed Ring",c:"Japan",reg:"Asia–Oceania",surf:"tarmac",fict:1,hs:.95,tech:.15,bump:.1,vmax:340,pts:[[10,64],[50,72],[90,62],[96,46],[88,32],[50,26],[14,34],[4,48]],lay:[L("Full Course")]},
+ {id:"kyoto",name:"Kyoto Driving Park",c:"Japan",reg:"Asia–Oceania",surf:"tarmac",fict:1,hs:.3,tech:.75,bump:.4,vmax:210,pts:gen(151,16,1.4,.5),
+   lay:[L("Yamagiwa + Miyabi"),L("Yamagiwa",null,{cut:[2,9]}),L("Miyabi",null,{cut:[9,16]})]},
+ {id:"tsukuba",name:"Tsukuba Circuit",c:"Japan",reg:"Asia–Oceania",surf:"tarmac",hs:.3,tech:.75,bump:.3,vmax:220,pts:[[18,68],[60,70],[84,58],[88,40],[72,30],[56,40],[40,34],[26,40],[18,54]],lay:[L("Course 2000",2.05)]},
+ {id:"broadbean",name:"Broad Bean Raceway",c:"Japan",reg:"Asia–Oceania",surf:"tarmac",fict:1,hs:.3,tech:.7,bump:.3,vmax:200,pts:gen(161,12,1.3,.45),lay:[L("Full Course")]},
+ {id:"tokyo",name:"Tokyo Expressway",c:"Japan",reg:"Asia–Oceania",surf:"tarmac",fict:1,hs:.75,tech:.4,bump:.5,vmax:300,pts:gen(171,22,2.6,.35),
+   lay:[L("Central Clockwise"),L("Central Counter-clockwise",null,{rev:1}),L("East Clockwise",null,{cut:[3,15]}),L("East Counter-clockwise",null,{cut:[3,15],rev:1}),L("South Clockwise",null,{cut:[10,20]}),L("South Counter-clockwise",null,{cut:[10,20],rev:1})]},
+ {id:"autopolis",name:"Autopolis International Racing Course",c:"Japan",reg:"Asia–Oceania",surf:"tarmac",hs:.5,tech:.7,bump:.45,vmax:290,pts:gen(181,16,1.5,.42),
+   lay:[L("Full Course",4.67),L("Shortcut Course",null,{cut:[4,10],vmax:240})]},
+ {id:"suzuka",name:"Suzuka Circuit",c:"Japan",reg:"Asia–Oceania",surf:"tarmac",hs:.6,tech:.75,bump:.3,vmax:300,pts:[[12,68],[36,76],[58,70],[72,56],[66,40],[52,34],[40,40],[48,54],[66,58],[82,50],[90,60],[80,74],[60,86],[34,86],[16,80]],
+   lay:[L("Full Course",5.81),L("East Course",2.24,{cut:[8,13],vmax:240})]},
+ {id:"fuji",name:"Fuji International Speedway",c:"Japan",reg:"Asia–Oceania",surf:"tarmac",hs:.9,tech:.45,bump:.25,vmax:330,pts:[[10,34],[70,28],[88,36],[90,50],[78,58],[62,54],[50,64],[36,72],[20,68],[10,52]],
+   lay:[L("Full Course",4.56),L("Short Course",null,{cut:[2,7],vmax:250})]},
+ {id:"panorama",name:"Mount Panorama Circuit",c:"Australia",reg:"Asia–Oceania",surf:"tarmac",hs:.6,tech:.8,bump:.6,vmax:290,pts:[[12,70],[34,74],[48,60],[62,66],[82,56],[88,40],[72,28],[54,34],[40,22],[22,30],[14,50]],lay:[L("Full Course",6.21)]},
+ {id:"yas",name:"Yas Marina Circuit",c:"UAE",reg:"Asia–Oceania",surf:"tarmac",hs:.75,tech:.5,bump:.2,vmax:320,pts:[[10,70],[40,72],[60,78],[84,70],[90,54],[76,46],[84,34],[66,24],[44,28],[30,22],[16,34],[22,52],[10,58]],lay:[L("Full Course",5.28)]},
+ {id:"sugo",name:"Sportsland SUGO",c:"Japan",reg:"Asia–Oceania",surf:"tarmac",hs:.4,tech:.75,bump:.4,vmax:250,isNew:1,pts:gen(191,15,1.5,.45),lay:[L("Full Course",3.6)]},
+];
+const REGIONS=["All","Americas","Europe","Asia–Oceania"];
+const RACES=[
+ {id:"sprint",n:"Sprint",d:"Short race, 3 to 8 laps. No fuel or tyre-wear concern."},
+ {id:"endurance",n:"Endurance",d:"Long race with fuel and tyre wear. Stable, kind to tyres."},
+ {id:"timetrial",n:"Time trial",d:"One fast lap. Maximum grip, sharper rotation."},
+ {id:"wet",n:"Wet race",d:"Rain or damp surface. Softer springs and extra downforce."},
+ {id:"daily",n:"Daily Race / Sport",d:"Balance of Performance applies. Power and weight are fixed."},
+];
+
+/* ============ TUNING ENGINE ============ */
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const r1=x=>Math.round(x*10)/10, r2=x=>Math.round(x*100)/100;
+const f1=x=>r1(x).toFixed(1), f2=x=>r2(x).toFixed(2);
+function effTrack(t,l){return Object.assign({},t,{hs:l.hs??t.hs,tech:l.tech??t.tech,vmax:l.vmax??t.vmax,len:l.len??null})}
+
+const WX={clear:["Clear",0],cloud:["Overcast",0],rain:["Light rain",.6],storm:["Heavy rain",1]};
+const CONDS={dry:["Dry",0],damp:["Damp",.4],wet:["Wet",.8]};
+const TEMPS={cold:["Cold, under 15 \u00B0C",-1],mild:["Mild, 15 to 25 \u00B0C",0],warm:["Warm, 25 to 35 \u00B0C",1],hot:["Hot, over 35 \u00B0C",2]};
+const TEMP_WEAR={"-1":1.08,0:1,1:.92,2:.82};
+/* how wet the road is, 0 dry to 1 flooded. A manual track condition wins, then weather, then the race type */
+function wetLvl(race){
+  if(st.cond!=="auto")return CONDS[st.cond][1];
+  if(st.weather!=="auto")return WX[st.weather][1];
+  return race==="wet"?.7:0;
+}
+const tempIdx=()=>st.temp==="auto"?0:TEMPS[st.temp][1];
+function stepCompound(name,d){
+  const m=name.match(/^(\w+) (Hard|Medium|Soft)$/);if(!m||!d)return name;
+  const o=["Soft","Medium","Hard"];const i=clamp(o.indexOf(m[2])+(d>0?1:-1),0,2);
+  return m[1]+" "+o[i];
+}
+function aeroPct(t,race){
+  const wl=wetLvl(race);
+  return clamp(.05+.45*t.tech+.55*(1-t.hs)+.12*wl,.05,.95);
+}
+function aeroLevel(p){return p<.25?"Low":p<.45?"Low to medium":p<.65?"Medium":p<.82?"Medium to high":"High"}
+function aeroWhy(t,race){
+  const wl=wetLvl(race),w=[];
+  if(t.hs>.8)w.push("long full-throttle sections, so drag costs more than grip gains");
+  else if(t.hs<.45)w.push("mostly slow and medium-speed corners, so extra grip is worth the drag");
+  if(t.tech>.65)w.push("many corners where downforce adds grip");
+  else if(t.tech<.35)w.push("few corners, so top speed matters more");
+  if(wl>=.4)w.push("wet road, so extra rear downforce adds stability");
+  return w.length?"This track has "+w.join(", and ")+".":"A balanced track, so a middle setting is the safe choice.";
+}
+function tyreChoice(car,trk,race){
+  const W=wetLvl(race),wetRoad=W>=.4;
+  if(st.tyre!=="auto"&&trk.surf==="tarmac"){
+    const wetT=/Inter|Heavy/.test(st.tyre);
+    const why=wetRoad&&!wetT?"You chose a slick for a wet road. Expect very little grip unless the track is drying.":!wetRoad&&wetT?"Wet tyres on a dry track overheat and wear very fast. Use only if rain is forecast.":"Chosen by you. The values below are unchanged and the race plan uses this compound's wear rate.";
+    return{name:st.tyre,why};
+  }
+  if(trk.surf==="snow")return{name:"Snow tyres",why:"Lake Louise is a snow surface. Slicks have almost no grip here."};
+  if(trk.surf==="dirt")return{name:"Dirt tyres",why:"Loose surface. Dirt compound keeps the car predictable."+(wetRoad?" A wet dirt road turns to mud, so brake earlier and keep inputs gentle.":"")};
+  if(W>=.8)return{name:"Heavy Wet",why:"Standing water or a wet road. Heavy Wet clears the most water. Switch to Intermediate once a dry line appears."};
+  if(wetRoad)return{name:"Intermediate",why:"Damp or lightly wet road. Intermediates overheat once the line dries, and Heavy Wet is better if puddles form."};
+  const T=tempIdx();
+  const tmp=T>=1?" Hot track: one step harder than normal to avoid overheating.":T<0?" Cold track: one step softer than normal to build temperature.":"";
+  if(car.pp<250)return{name:stepCompound("Comfort Soft",T>=1?1:0),why:"Cars this slow rarely have access to sports compounds. Comfort is the grippiest available."+tmp};
+  if(car.pp<450)return{name:stepCompound("Sports Soft",T>=1?1:0),why:"Best grip available before racing tyres, at a modest PP cost."+tmp};
+  const base={sprint:"Racing Medium",endurance:"Racing Hard",timetrial:"Racing Soft",daily:"Racing Medium",wet:"Racing Medium"}[race];
+  const m=stepCompound(base,T>=1?1:T<0?-1:0);
+  const w={sprint:"A balance of grip and wear for a short race.",endurance:"Wears slowest, so lap times hold across a stint.",timetrial:"Maximum grip for one lap. Wear does not matter.",daily:"Medium suits most Sport mode lobbies. Hard if the race is long.",wet:"Dry-weather choice for a wet-type race with a dry road."}[race];
+  return{name:m,why:w+tmp};
+}
+function topSpeedTarget(car,trk){
+  const cap=120+car.pp*0.28+(car.isRace?30:0);
+  return Math.round(clamp(Math.min(trk.vmax,cap)*0.97,60,400));
+}
+function tune(car,t,race){
+  const hs=t.hs,tech=t.tech,bump=t.bump,race_=car.isRace,dt=car.dt;
+  const old=car.year&&car.year<1975;
+  const wl=wetLvl(race),wet=wl>=.4,end=race==="endurance",tt=race==="timetrial";
+  const hasAero=car.isRace||car.vgt;
+  const S={}; const notes=[];
+  const tire=tyreChoice(car,t,race);
+  S.tyre=tire;
+  // ride height (mm)
+  let rh=race_?72:old?145:108; rh+=bump*22-hs*6+(wet?6:0); if(end)rh+=3;
+  const rake=hasAero?6:2;
+  S.rh=[Math.round(clamp(rh,50,200)),Math.round(clamp(rh+rake,50,200))];
+  // springs: natural frequency
+  let nf=race_?3.1:old?1.6:2.1; nf+=0.5*hs-0.7*bump-(wet?0.3:0)-(end?0.15:0)+(tt?0.15:0);
+  S.nf=[clamp(nf,1,5),clamp(nf+(dt==="FF"?-0.15:0.1),1,5)];
+  // anti-roll bars
+  const arb={FF:[3,5],FR:[5,4],MR:[5,4],RR:[5,3],"4WD":[5,5]}[dt];
+  const aa=Math.round(tech*1.2)-(wet?1:0)-(old?1:0);
+  S.arb=[clamp(arb[0]+aa,1,10),clamp(arb[1]+aa,1,10)];
+  // dampers
+  const dc=36+(race_?2:0)-bump*7-(wet?2:0), de=46+(race_?4:0)-bump*8;
+  S.dampC=[Math.round(dc),Math.round(dc-1)];
+  S.dampE=[Math.round(de),Math.round(de-1)];
+  // camber and toe
+  S.camber=[r1(clamp(1.8+1.3*tech+(race_?.4:0)-(end?.3:0),0.5,5)),r1(clamp(1.0+.9*tech+(dt==="RR"||dt==="MR"?.3:0)-(end?.2:0),0.3,4))];
+  S.toe=[tech>.65?-0.1:0,r2(0.2+0.12*hs+(dt==="RR"||dt==="MR"?0.05:0))];
+  // aero: a recommendation for every car, numbers where the car has adjustable aero
+  const ap=aeroPct(t,race);
+  S.aeroPct=ap;S.aeroRearPct=clamp(ap+(dt==="MR"?.12:dt==="FF"?.04:.08),0,1);S.aeroLvl=aeroLevel(ap);S.aeroWhy=aeroWhy(t,race);
+  if(hasAero){
+    const f=50+400*ap;
+    S.aero=[Math.round(f/5)*5,Math.round((f+55+(dt==="MR"?15:0))/5)*5];
+  }
+  // LSD
+  const lsd={FR:[12,35,20],FF:[7,22,10],MR:[10,35,25],RR:[9,30,18],"4WD":[10,35,20]}[dt];
+  S.lsd=[Math.round(lsd[0]+(tech>.6?1:0)),Math.round(lsd[1]+(tech>.6?3:0)-(wet?5:0)),Math.round(lsd[2]+(hs>.7?3:0))];
+  if(dt==="4WD"){S.lsdF=[5,20,10];S.split=tech>.6?"35:65":"40:60"}
+  // brakes
+  S.brake=({FF:1,FR:0,MR:-1,RR:-2,"4WD":0})[dt]+(hs>.8&&!race_?0:0);
+  // gearing
+  S.top=topSpeedTarget(car,t);
+  // power
+  S.tcs=clamp((race_||tt?1:2)+(wl>=.8?3:wet?2:0),0,5); S.asm=race_&&!wet?0:1;
+  if(old){notes.push("Pre-1975 car: tuned for soft springs and tall ride height. Expect more body roll than the numbers suggest.")}
+  if(race==="daily")notes.push("Daily Races apply Balance of Performance. Power and weight are fixed by the event, so only the settings on this sheet carry over.");
+  if(t.surf==="dirt"||t.surf==="snow")notes.push("Loose surface: ride height and damping are raised, LSD acceleration is kept moderate.");
+  if(wl>=.8)notes.push("Heavy rain: springs, damping and anti-roll bars are softened, LSD acceleration is lowered and traction control is raised.");
+  else if(wet)notes.push("Wet or damp road: softer springs and bars, extra rear downforce and a more open differential.");
+  if(tempIdx()>=2)notes.push("Hot track: tyres overheat sooner and wear about 18% faster. Ease the throttle on exit and consider a harder compound.");
+  else if(tempIdx()<0)notes.push("Cold track: tyres take longer to warm up. Be gentle for the first lap.");
+  S.notes=notes;
+  return S;
+}
+
+const PARTS=[
+ {id:"tyres",g:35,t:1,why:"The single biggest grip gain per credit. Buy it first."},
+ {id:"susp",n:"Fully Customisable Suspension",g:6,t:2,why:"Unlocks every ride height, spring, damper and camber value on this sheet."},
+ {id:"lsd",n:"Fully Customisable Differential",g:3,t:2,why:"Unlocks initial torque, acceleration and braking sensitivity."},
+ {id:"trans",n:"Fully Customisable Transmission",g:4,t:2,why:"Unlocks final gear and top-speed matching for the long straight."},
+ {id:"brake",n:"Brake Balance Controller",g:1,t:1,why:"Lets you move braking bias to match the car's weight distribution."},
+ {id:"w1",n:"Weight Reduction Stage 1",g:6,t:1,why:"Cheap, light and good for every corner. Lower mass improves braking, turn-in and tyre wear."},
+ {id:"w2",n:"Weight Reduction Stage 2",g:9,t:2,why:"The next best PP-per-credit upgrade after Stage 1."},
+ {id:"clutch",n:"Racing Clutch and Flywheel",g:6,t:2,why:"Sharper throttle response. Strong value if the car is rear-wheel drive."},
+ {id:"intake",n:"Intake and Air Cleaner",g:8,t:1,why:"Inexpensive power. Start of the engine package."},
+ {id:"ecu",n:"Racing Computer (ECU)",g:12,t:2,why:"Free-flowing engine map. Lets the later hardware breathe."},
+ {id:"exhaust",n:"Racing Exhaust",g:10,t:2,why:"Reduces back-pressure. Pairs with the ECU."},
+ {id:"w3",n:"Weight Reduction Stage 3",g:13,t:3,why:"Expensive. Worth it when you are close to your PP ceiling and need power-to-weight."},
+ {id:"drive",n:"Carbon Driveshaft",g:3,t:2,why:"Reduces drivetrain inertia. Small gain, small cost."},
+ {id:"balance",n:"Engine Balancing and Port Polish",g:8,t:3,why:"Final engine refinement. Only after the cheaper parts."},
+ {id:"turbo",n:"Turbo kit or Supercharger (if offered)",g:30,t:3,why:"The largest single power step. Check the Tuning Shop to see if your car can take one."},
+ {id:"body",n:"Body Rigidity Refresh",g:5,t:3,why:"Restores stiffness on older cars. Most useful for classics over 15 years old."},
+ {id:"wing",n:"Rear wing or aero kit (if offered)",g:6,t:2,why:"Adds adjustable downforce.",aeroOnly:1},
+];
+function partsPlan(car,t,race,limit,tireName){
+  const sc=0.55+car.pp/700;
+  const base=car.pp;
+  const plan=[];
+  let pp=base;
+  let list;
+  if(car.isRace){
+    list=[{id:"tyres",n:"Tyres: "+tireName,g:0,t:1,why:"Race cars are already tuned. Tyres are the only grip lever you can still pull."}];
+  }else{
+    list=PARTS.map(p=>{
+      const o=Object.assign({},p);o.g=Math.round(p.g*sc*10)/10;
+      if(p.id==="wing"){const ap=aeroPct(t,race);o.why=ap>=.5?"Recommended here ("+aeroLevel(ap).toLowerCase()+" downforce). It unlocks the downforce sliders on the sheet, if the shop offers a wing or aero kit for this car.":"Optional here. Only worth it if you want the downforce sliders; this track favours "+aeroLevel(ap).toLowerCase()+" downforce.";if(ap<.3)o.t=1}
+      if(p.id==="tyres")o.n="Tyres: "+tireName;
+      return o;});
+    if(race==="endurance")list=list.filter(p=>p.id!=="turbo"&&p.id!=="balance");
+    if(car.dt==="FF")list=list.filter(p=>p.id!=="clutch"||true);
+    if(car.year&&car.year<1990&&car.pp<350)list.forEach(p=>{if(p.id==="body")p.t=2});
+  }
+  let remain=limit?limit-base:Infinity;
+  list.forEach(p=>{
+    if(remain>=p.g){remain-=p.g;pp+=p.g;plan.push(Object.assign({buy:true},p))}
+    else plan.push(Object.assign({buy:false},p));
+  });
+  // restrictor / ballast
+  let rest=null;
+  if(limit&&pp>limit){
+    const over=pp-limit;const per=car.pp*0.002;
+    rest={over:Math.round(over*10)/10,pct:Math.round(clamp(100-over/per,30,100))};
+  }
+  let baseOver=limit&&base>limit;
+  if(baseOver){
+    const over=base-limit,per=car.pp*0.002;
+    rest={over:Math.round(over*10)/10,pct:Math.round(clamp(100-over/per,30,100))};
+    plan.forEach(p=>{if(p.buy&&p.g>0){p.buy=false}});
+    pp=base;
+  }
+  return{plan,pp:Math.round(pp*10)/10,rest,base,limit,baseOver};
+}
+
+/* ============ RACE MODEL ============ */
+const COMP_BASE={Hard:{Racing:220,Sports:170,Comfort:130},Medium:{Racing:140,Sports:110,Comfort:90},Soft:{Racing:80,Sports:65,Comfort:55}};
+const COMP_PEN={Hard:.018,Medium:.009,Soft:0};
+const tyreTier=car=>car.pp<250?"Comfort":car.pp<450?"Sports":"Racing";
+function tyreOptions(car){
+  const tiers=car.pp<250?["Comfort"]:car.pp<450?["Comfort","Sports"]:["Comfort","Sports","Racing"];
+  const o=[];tiers.forEach(t=>["Hard","Medium","Soft"].forEach(c=>o.push(t+" "+c)));
+  o.push("Intermediate","Heavy Wet");return o;
+}
+const effLen=t=>t.len||3.8;
+function fmtT(s){s=Math.max(0,Math.round(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),sec=s%60;return h?`${h}:${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}`:`${m}:${String(sec).padStart(2,"0")}`}
+function lapSeconds(car,t){
+  const top=topSpeedTarget(car,t);
+  const avg=clamp(top*(0.5+0.22*t.hs-0.1*t.tech),55,260);
+  return effLen(t)/avg*3600;
+}
+function defLaps(car,t,race){
+  if(race==="endurance")return Math.round(clamp(3600/lapSeconds(car,t),8,200));
+  return {sprint:5,timetrial:1,wet:5,daily:8}[race]||5;
+}
+function fuelModel(car,t,mult){
+  const tank=Math.round(clamp(60+car.pp*0.07,40,140)/5)*5;
+  const lpk=(0.25+0.0004*car.pp)*(car.isRace?1.05:1);
+  return{tank,lpk,perLap:lpk*mult*effLen(t)};
+}
+function tyreLifeKm(car,t,base,wear){
+  return base*(1.15-0.35*t.tech)*(1.2-car.pp/2500)*TEMP_WEAR[tempIdx()]/wear;
+}
+function compsFor(car,t,race){
+  const selTier=st.tyre!=="auto"?st.tyre.split(" ")[0]:null;
+  const tier=selTier&&COMP_BASE.Hard[selTier]!==undefined?selTier:tyreTier(car);
+  if(t.surf==="dirt")return[{name:"Dirt tyres",base:90,pen:0,tag:"Only option"}];
+  if(t.surf==="snow")return[{name:"Snow tyres",base:90,pen:0,tag:"Only option"}];
+  const W=wetLvl(race);
+  if(W>=.4){const hw={name:"Heavy Wet",base:90,pen:0,tag:"Standing water"},im={name:"Intermediate",base:75,pen:.01,tag:"Damp track"},dr={name:tier+" Soft",base:COMP_BASE.Soft[tier]*0.5,pen:0,tag:"Only if the track dries"};return W>=.8?[hw,im,dr]:[im,hw,dr]}
+  return["Hard","Medium","Soft"].map((c,i)=>({name:tier+" "+c,base:COMP_BASE[c][tier],pen:COMP_PEN[c],tag:["Fewest stops","Balanced","Maximum pace"][i]}));
+}
+function strategy(car,t,N,fuelMult,wear,comps){
+  const lap=lapSeconds(car,t),len=effLen(t),fm=fuelModel(car,t,fuelMult);
+  const fuelLaps=Math.max(1,Math.floor(fm.tank/fm.perLap-0.5));
+  return comps.map((c,i)=>{
+    const life=Math.max(1,Math.floor(tyreLifeKm(car,t,c.base,wear)/len));
+    const stint=Math.max(1,Math.min(life,fuelLaps));
+    const stops=Math.max(0,Math.ceil(N/stint)-1);
+    const sl=Math.ceil(N/(stops+1));
+    const stintLaps=[];let left=N;
+    for(let k=0;k<=stops&&left>0;k++){const l=Math.min(sl,left);stintLaps.push(l);left-=l}
+    const realStops=stintLaps.length-1;
+    const fuelAdd=stintLaps.slice(1).map(l=>Math.min(fm.tank,Math.ceil(l*fm.perLap+fm.perLap*0.5)));
+    const startFuel=Math.min(fm.tank,Math.ceil(stintLaps[0]*fm.perLap+fm.perLap*0.5));
+    const pitTime=fuelAdd.reduce((a,f)=>a+24+f/8,0);
+    return{plan:"ABC"[i],name:c.name,tag:c.tag,life,fuelLaps,stops:realStops,stintLaps,fuelAdd,startFuel,pitTime,total:N*lap*(1+c.pen)+pitTime};
+  });
+}
+function stratHtml(car,t,S,race){
+  const N=st.laps,fm=fuelModel(car,t,st.fuel);
+  const plans=strategy(car,t,N,st.fuel,st.wear,compsFor(car,t,race));
+  const best=plans.reduce((a,b)=>b.total<a.total?b:a);
+  const none=plans.every(p=>p.stops===0);
+  const lines=[];
+  const cards=plans.map(p=>{
+    let from=1;
+    const items=p.stintLaps.map((l,k)=>{const a=from;from+=l;return{a,l,k}});
+    const shown=items.length>8?items.slice(0,7):items;
+    const stints=shown.map(o=>`<li><b>L${o.a}&ndash;${o.a+o.l-1}</b> ${o.l} laps${o.k<p.stintLaps.length-1?` &middot; pit, +${p.fuelAdd[o.k]} L`:" &middot; finish"}</li>`).join("")+(items.length>8?`<li>&hellip; ${items.length-7} more stints</li>`:"");
+    lines.push(`Plan ${p.plan} (${p.name}): ${p.stops?p.stops+" stop(s), pit laps "+items.slice(0,-1).map(o=>o.a+o.l-1).join(", "):"no stop"}, race ${fmtT(p.total)}`);
+    const sel=st.tyre===p.name?' <span class="tag">Selected</span>':"";
+    return `<div class="plan"><h4><span>Plan ${p.plan}</span>${p===best?'<span class="badge">Fastest</span>':""}</h4>
+      <div class="big">${p.stops===0?"No stop":p.stops+(p.stops===1?" stop":" stops")}</div>
+      <div class="cmp">${esc(p.name)}${sel}</div>
+      <div class="fine" style="margin:2px 0 0">${esc(p.tag)}. Tyres last about ${p.life} laps, fuel about ${p.fuelLaps}.</div>
+      <ul>${stints}<li>Start fuel <b>${p.startFuel} L</b> of ${fm.tank} L</li><li>Race time <b>${fmtT(p.total)}</b>${p===best?"":` (+${fmtT(p.total-best.total)})`}</li></ul></div>`;
+  }).join("");
+  lastPlan="Race plan ("+N+" laps, fuel x"+st.fuel+", tyre wear x"+st.wear+"):\n"+lines.join("\n");
+  let extra="";
+  if(st.tyre!=="auto"&&t.surf==="tarmac"&&!plans.some(p=>p.name===st.tyre)){
+    const [ti,c]=st.tyre.split(" ");const base=COMP_BASE[c]&&COMP_BASE[c][ti];
+    if(base)extra=` Your selected ${esc(st.tyre)} lasts about ${Math.max(1,Math.floor(tyreLifeKm(car,t,base,st.wear)/effLen(t)))} laps.`;
+  }
+  const msg=none?`No pit stop is needed over ${N} lap${N===1?"":"s"}. Start with about ${plans[0].startFuel} L and pick the compound for pace.`:`${N} laps at this fuel and tyre wear rate need pit stops. Every stop changes tyres and refuels. Pit lane loss is modelled at 24 s plus refuelling time.`;
+  return `<div class="strat"><div class="grp" style="margin-bottom:8px"><h3>Race plan<span>${N} laps &middot; est. lap ${fmtT(lapSeconds(car,t))} &middot; fuel x${st.fuel} &middot; tyre wear x${st.wear}</span></h3></div>
+    <p class="fine" style="margin:0 0 12px">${msg}${extra} Check the event rules, because some races require two different compounds.</p>
+    <div class="plans">${cards}</div></div>`;
+}
+/* car illustration */
+const BODY={
+ coupe:"M16,70 L20,58 L54,52 L90,36 Q112,28 150,28 Q190,28 208,40 L252,52 L284,58 L286,70 Z",
+ wedge:"M14,70 L18,60 L70,52 L122,34 Q152,26 178,34 L238,52 L288,58 L290,70 Z",
+ hatch:"M16,70 L16,38 Q18,30 40,28 L150,26 Q176,26 192,40 L236,52 L284,58 L286,70 Z",
+ sedan:"M16,70 L18,52 L46,48 L84,34 Q98,28 132,28 L182,28 Q202,30 216,42 L262,50 L284,56 L286,70 Z",
+ suv:"M16,70 L16,34 Q16,28 26,28 L170,28 Q190,28 198,40 L214,52 L272,56 L284,62 L286,70 Z",
+ classic:"M16,70 L18,58 Q30,50 56,52 L84,42 Q104,32 128,36 L160,42 L214,50 Q250,52 270,56 L286,62 L288,70 Z",
+ open:"M40,68 L46,58 L98,54 L118,38 L138,38 L150,52 L236,58 L284,60 L284,68 Z M12,34 L40,34 L40,44 L12,44 Z M262,64 L296,64 L296,70 L262,70 Z",
+ kart:"M90,66 L96,58 L150,56 L206,58 L212,66 Z M120,44 L150,44 L156,56 L124,56 Z"
+};
+const BODY_NAME={coupe:"coupe",wedge:"mid-engine",hatch:"hatchback",sedan:"saloon",suv:"SUV or van",classic:"classic",open:"open-wheel",kart:"kart"};
+function bodyType(car){
+  const n=car.full;
+  if(/Kart/.test(n))return"kart";
+  if(/F1500|F3500|Red Bull X|SF19|SF23|MP4\/4|RA272|W196R|Chaparral 2X/.test(n))return"open";
+  if(/Tundra|F-150|Land Cruiser|Jimny|Urus|RAV4|Willys|Unimog|Carry|HiAce|Alphard|Step WGN|Qashqai|Captur|CX-30|CR-V|C-HR|2008 Allure|Kangoo|Ambulance|Samba|Avantime|Espace F1/.test(n))return"suv";
+  if(/R18|919|962|963|9X8|499P|GR010|TS0|M Hybrid|787B|Sauber|XJR-9|R92CP|GT-One|908 HDI|Gr\.1/.test(n)||(car.dt==="MR"&&(car.pp>=560||car.vgt)))return"wedge";
+  if(car.year&&car.year<1966)return"classic";
+  if(/Golf|Civic|Fit Hybrid|Polo|Clio|Megane|Focus|205|208|Swift|Scirocco|Mini|Cooper|500|Panda|Twingo|R4|MiTo|Demio|3 Gr|Mazda 3|Elantra|A45|Abarth|Beat|N-ONE|Prius|Aqua|Corsa|DS3|A112|Yaris|BX19|RCZ|TT|Clubman|Impreza 22B|Cappuccino|GTI/.test(n)||(car.dt==="FF"&&car.pp<520))return"hatch";
+  if(/Sedan|Charger|G70|M3 (1989|1997|2003|2007)|M3 Sport|190E|300 SEL|Chaser|Mark II|Crown|Atenza|Skyline R3|Silvia|Evolution|Lancer|WRX|Impreza|Escort|Sierra|Model|Taycan|Ioniq 6|DS21|V40|Giulia|155|RS5|M4|M2|C63|Polestar|Safety Car|240 SE/.test(n))return"sedan";
+  return"coupe";
+}
+function carSvg(car){
+  const type=bodyType(car);
+  const kart=type==="kart",open=type==="open";
+  const wx=kart?[100,200]:[72,232],wy=open?68:kart?73:70,wr=kart?11:open?18:16;
+  const driven=car.dt==="4WD"?[1,1]:car.dt==="FF"?[0,1]:[1,0];
+  const wheels=wx.map((x,i)=>`<circle cx="${x}" cy="${wy}" r="${wr}" fill="var(--bg)" stroke="var(--fg)" stroke-width="2"/><circle cx="${x}" cy="${wy}" r="${wr*0.34}" fill="${driven[i]?"var(--accent)":"var(--fg)"}"/>`).join("");
+  return `<svg viewBox="0 0 300 100" role="img" aria-label="Side-view illustration of a ${BODY_NAME[type]} body, front facing right"><line x1="6" y1="87" x2="294" y2="87" stroke="var(--hair)" stroke-width="1"/><path d="${BODY[type]}" fill="var(--soft)" stroke="var(--fg)" stroke-width="2" stroke-linejoin="round"/>${wheels}</svg>`;
+}
+function carPicHtml(car){
+  const q=encodeURIComponent(car.full+" Gran Turismo 7");
+  return `<div class="carpic">${carSvg(car)}<div class="cap"><span><b>${esc(car.make)} ${esc(car.name)}</b> &middot; ${BODY_NAME[bodyType(car)]} &middot; ${car.dt}</span><span>Red hubs show driven wheels &middot; <a href="https://www.google.com/search?q=${encodeURIComponent('site:gran-turismo.com '+car.full)}" target="_blank" rel="noopener">Official GT page</a> &middot; <a href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener">More photos</a></span></div></div>`;
+}
+/* track profile */
+const PROF={
+ suzuka:{b:"A figure-eight with a fast opening sector, a technical middle and a flat-out kink before the last chicane. It rewards rhythm more than raw power.",k:["Esses and Dunlop Curve: quick direction changes. Stay smooth and let the car settle between apexes.","Degner and the hairpin: heavy braking on bumpy asphalt, so brake a little earlier than you think.","Spoon Curve: long double-apex. A late apex sets up the entire back straight.","130R then the Casio Triangle chicane: carry speed through 130R, then brake hard in a straight line."]},
+ spa:{b:"The longest regular circuit. Full-throttle sections link high-load sweepers, and the weather can change from one lap to the next.",k:["Eau Rouge and Raidillon: a compression followed by a climb. Downforce cars take it flat.","Pouhon: a fast double-left. Commit early and keep the steering smooth.","Blanchimont: near flat-out, ending at the final chicane braking zone.","La Source hairpin: slow, so exit speed is worth more than entry speed."]},
+ monza:{b:"Long straights joined by tight chicanes. Low drag and brave braking matter most.",k:["Rettifilo chicane: the biggest braking zone. Get the car straight before turning.","Curva Grande and the Lesmos: smooth, fast corners. Avoid the kerbs.","Ascari chicane: link the three apexes and prioritise exit speed.","Parabolica: late apex with progressive throttle for the main straight."]},
+ nurb:{b:"A modern Grand Prix loop and the Nordschleife share a site. The Nordschleife is more than 20 km of crests, banking and bumps, where consistency beats peak pace.",k:["Nordschleife Flugplatz: the car goes light over the crest. Be straight and off the brakes.","Karussell: a banked concrete bowl. Keep the car in the groove and let the banking load the suspension.","Dottinger Hohe straight: the longest full-throttle run, so set top speed here.","Grand Prix loop: hairpin and final chicane are the overtaking and braking spots."]},
+ lemans:{b:"Two huge straights joined by a technical sector. Top speed, brake cooling and fuel use decide the result.",k:["Mulsanne Straight: low drag is key and the car should be at top speed for a long time.","Dunlop chicane and the Porsche Curves: flat for downforce cars, a big commitment for everyone else.","Arnage: slow and heavy on the brakes, then a long run back to full speed.","Fuel use is high here. Plan stops around the long straights."]},
+ daytona:{b:"A high-banked tri-oval joined to a technical infield. Drafting and stability under load matter most.",k:["Banked turns: stay low on the banking and keep throttle on. The tyres load heavily.","Bus stop chicane: heavy braking then quick direction changes. Ride the kerb gently.","Tri-oval layout: the whole lap is full throttle, so tyre wear and drafting decide the race."]},
+ fuji:{b:"A very long main straight, a technical middle sector and fast final corners.",k:["Turn 1: hardest braking of the lap at the end of the straight.","Dunlop corner and the 300R sweeper: fast and smooth. Keep the car calm.","Final sector: exit speed onto the main straight is worth tenths."]},
+ laguna:{b:"Short, bumpy and elevated. Blind crests and the Corkscrew make memorising the line essential.",k:["Andretti Hairpin: slow, so brake late in a straight line and rotate the car early.","The Corkscrew: a blind left-right drop. Aim at the top of the crest and trust the braking point.","Rainey Curve: a fast right. Carry speed onto the following straight."]},
+ interlagos:{b:"A short, anticlockwise lap with strong elevation change and a long run to the finish line.",k:["Senna S: a quick left-right right after the start. Be tidy to exit well.","Descida do Lago: a downhill sweep onto a long straight, where exit speed matters.","Juncao: the final corner. Get the power down early for the run to the line."]},
+ brands:{b:"A rollercoaster with big elevation changes, narrow track and little room for error.",k:["Paddock Hill Bend: blind downhill right. Brake early and trust the camber.","Druids hairpin: slow and technical. A late apex gives a better run downhill.","Clearways: fast right-hander. Smooth throttle application sets up the straight."]},
+ redbull:{b:"A short lap with three long straights, hard braking and heavy acceleration.",k:["Turn 1: uphill braking zone. The incline helps, but lock-ups cost time.","Turn 3: hard braking and a short run to the next corner.","Acceleration out of the slow corners decides the lap. Use traction control if the tail steps out."]},
+ panorama:{b:"A road circuit with walls close to the track. The mountain section climbs and falls and the Conrod Straight is flat-out.",k:["Mountain section: elevation changes and blind crests. Stay smooth.","The Chase: a fast kink in the middle of Conrod Straight. Stay committed.","Walls are close, so give yourself margin on lap one."]},
+ yas:{b:"A modern Grand Prix circuit with long straights, hairpins and a technical section around the marina and hotel.",k:["Heavy braking zones after the long straights. Brakes work hard.","Hotel section: quick direction changes. Be tidy for the best exit.","Last sector: the corners link, so a good exit sets up the start/finish straight."]},
+ villeneuve:{b:"Stop-start layout with heavy braking and kerbs, ending at the Wall of Champions chicane.",k:["Hairpin: slow, so brake in a straight line and get the power down early.","Kerbs are tall in places. Avoid the highest ones.","Final chicane: carry as much speed as you can without touching the wall."]},
+ barcelona:{b:"A balanced test with a long main straight, a fast Turn 3 and a tricky last chicane.",k:["Turn 1: the main braking zone after the straight.","Turn 3: fast and long. Tyre load is high.","Last chicane: tight and slow, and exit speed sets up the straight."]},
+ trial:{b:"A mid-speed mountain circuit of fast sweepers and a couple of hairpins.",k:["Flowing corners: a smooth, wide line pays off.","The tunnel section is flat out. Use it to rest the tyres.","Hairpins: brake in a straight line, then power out early."]},
+ hsr:{b:"A banked, high-speed oval-style track where drag and top speed matter most.",k:["The banked corners load the suspension. Stay on the throttle.","Long straights: set final gear for the longest straight.","Slipstreaming is big. Stay close but watch tyre temperature."]},
+ tsukuba:{b:"A short, tight and technical circuit with a long straight and a hairpin.",k:["The hairpin is the key braking zone.","Back section: quick direction changes. Be tidy.","Exit from the final corner sets the lap time."]}
+};
+function profFallback(trk,t){
+  const sp=t.hs>.8?"A very fast circuit":t.hs>.55?"A medium-to-fast circuit":t.hs>.35?"A medium-speed circuit":"A slow, tight circuit";
+  const te=t.tech>.7?"with constant direction changes":t.tech>.5?"with a mix of corners and straights":"with long, flowing sections";
+  const bu=t.bump>.55?" The surface is bumpy, so a softer setup helps traction.":t.bump<.2?" The surface is smooth, so a stiffer setup pays off.":"";
+  const orig=trk.fict?" It is an original Gran Turismo circuit.":"";
+  const sf=trk.surf==="dirt"?" Loose dirt surface: weight transfer is slow and grip changes with every pass.":trk.surf==="snow"?" Snow surface: grip is very low, so every input has to be gentle.":"";
+  const k=[];
+  if(t.hs>.55)k.push("Longest straight: set the final gear so top gear peaks just before the braking zone.");
+  k.push(t.tech>.6?"Linked corners: give up some entry speed in the first corner for a faster exit onto the next.":"Fast corners: lift rather than brake where you can, to keep the car balanced.");
+  if(t.bump>.45)k.push("Bumps and crests: stay off the brakes over crests, where the tyres unload.");
+  k.push("Heaviest braking zone: brake in a straight line, then release gradually as you turn in.");
+  return{b:sp+" "+te+"."+bu+orig+sf,k};
+}
+function focusList(car,t,S,race){
+  const f=[];
+  const dt=car.dt;
+  f.push({FF:"Front-wheel drive: brake before the turn, ease off the brake to rotate, and wait for the steering to unwind before the throttle. Early power causes understeer.",
+    FR:"Rear-wheel drive: be gentle on corner exit. Add throttle progressively once the car points straight to keep the rear planted.",
+    MR:"Mid-engine: it rotates sharply but can snap if you lift suddenly mid-corner. Stay smooth on lift-off.",
+    RR:"Rear engine: braking shifts weight off the rear, so brake in a straight line and be patient on turn-in.",
+    "4WD":"All-wheel drive: strong traction out of slow corners. It will push wide if you overshoot entry speed."}[dt]);
+  if(car.pp>=700&&t.tech>.6)f.push("This car has more power than the track can use. Wheelspin out of slow corners costs more than it gains, so be selective with the throttle.");
+  if(car.pp<350&&t.hs>.6)f.push("Low power on a fast track: momentum is everything. Avoid scrubbing speed and use the slipstream where you can.");
+  if(car.isRace)f.push("Aero car: downforce builds with speed. Keep off the kerbs, which unsettle the platform, and use the brakes hard at high speed.");
+  if(car.year&&car.year<1975)f.push("Pre-1975 car with early brakes: brake much earlier, expect fade on long runs, and accept body roll.");
+  if(/Ioniq|Taycan|Model|SU7|U9|Afeela|Polestar|i3|e-tron|ID\.R|Xiaomi/.test(car.full))f.push("Electric car: heavy with instant torque. Tyre wear is high, so manage throttle and brake earlier.");
+  if(t.bump>.55)f.push("Bumpy surface: avoid riding the kerbs, brake in straight lines and give the car time to settle after crests.");
+  if(t.hs>.8)f.push("Top speed matters here. Set the final gear for the longest straight and follow the slipstream.");
+  if(t.tech>.7)f.push("Technical track: exit speed matters more than entry speed. Sacrifice the first corner of a sequence for the next one.");
+  if(t.surf==="dirt"||t.surf==="snow")f.push("Loose surface: smooth, early inputs. Sudden steering or braking breaks grip.");
+  if(race==="endurance")f.push("Endurance: conserve tyres by avoiding wheelspin and lock-ups. Lift early before braking to save fuel, and keep traction control at 2.");
+  if(wetLvl(race)>=.4)f.push("Wet: brake earlier and straighten up first. Avoid kerbs and painted lines. The dry line becomes the slippery one.");
+  if(tempIdx()>=2)f.push("Hot track: tyres overheat and grip fades late in a stint. Protect them on exit and avoid sliding.");
+  if(race==="timetrial")f.push("Time trial: use every kerb you can safely and build tyre temperature on the out lap.");
+  return f.slice(0,7);
+}
+function bars(v){return `<span class="bar" aria-hidden="true">${Array.from({length:10},(_,i)=>`<i${i<v?' class="on"':""}></i>`).join("")}</span>`}
+function profHtml(car,trk,lay,t,S,race){
+  const p=PROF[trk.id]||profFallback(trk,t);
+  const rt=(label,v)=>`<div class="rate"><span>${label}</span>${bars(v)}<span class="mono">${v}</span></div>`;
+  const spd=Math.round(t.hs*10),tec=Math.round(t.tech*10),bmp=Math.round(t.bump*10);
+  const tyr=clamp(Math.round((0.45*t.tech+0.35*t.hs+0.2*car.pp/1000)*10),1,10);
+  const fue=clamp(Math.round((0.25+0.65*t.hs+0.15*car.pp/1000)*10),1,10);
+  const foc=focusList(car,t,S,race);
+  return `<div class="prof"><div class="grp" style="margin-bottom:8px"><h3>Track profile<span>${esc(trk.name)} &middot; ${esc(lay.n)}</span></h3></div>
+   <div class="profgrid">
+    <div class="pa"><p class="blurb">${esc(p.b)}</p>
+      ${rt("Speed",spd)}${rt("Technical",tec)}${rt("Bumps",bmp)}${rt("Tyre wear",tyr)}${rt("Fuel use",fue)}
+      <p class="fine" style="margin:8px 0 0">Ratings are estimates for this car on this layout.</p></div>
+    <div class="pb"><div class="lab" style="margin-bottom:6px">Key sections</div>
+      <ul class="klist">${p.k.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+      <div class="lab" style="margin:18px 0 6px">What to focus on with this car</div>
+      <ul class="klist">${foc.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+   </div></div>`;
+}
+let condCar=-1;
+function renderCond(car,t){
+  const opts=["auto",...tyreOptions(car)];
+  const ts=$("#tyresel");
+  if(condCar!==car.id){
+    ts.innerHTML=opts.map(o=>`<option value="${o}">${o==="auto"?"Auto (recommended)":o}</option>`).join("");
+    condCar=car.id;if(!opts.includes(st.tyre))st.tyre="auto";
+  }
+  ts.value=st.tyre;ts.disabled=t.surf!=="tarmac";
+  $("#tyread").textContent=t.surf!=="tarmac"?"Fixed by the surface":st.tyre==="auto"?"Auto picks by race type":"Selected by you";
+  $("#surfro").textContent=t.surf==="tarmac"?"Tarmac":t.surf==="dirt"?"Dirt":"Snow";
+  $("#wxsel").value=st.weather;$("#condsel").value=st.cond;$("#tempsel").value=st.temp;
+  const wl=wetLvl(st.race);
+  $("#wxread").textContent=st.weather==="auto"?(st.race==="wet"?"Wet race type implies rain":"No rain assumed"):WX[st.weather][0];
+  $("#condread").textContent="Road is "+(wl>=.8?"wet, standing water":wl>=.4?"damp or lightly wet":"dry");
+  $("#tempread").textContent=st.temp==="auto"?"Assumes a mild day":"Tyre wear x"+TEMP_WEAR[tempIdx()].toFixed(2).replace(/0$/,"");
+  const li=$("#laps");if(+li.value!==st.laps)li.value=st.laps;
+  $("#fuelsel").value=String(st.fuel);$("#wearsel").value=String(st.wear);
+  const lap=lapSeconds(car,t),fm=fuelModel(car,t,st.fuel);
+  $("#lapread").textContent="About "+fmtT(lap)+" per lap, race "+fmtT(lap*st.laps)+(t.len?"":" (length estimated)");
+  $("#fuelread").textContent="Tank about "+fm.tank+" L, "+f1(fm.perLap)+" L per lap";
+  $("#wearread").textContent=st.wear>1?"Tyres wear "+st.wear+" times faster":"Normal wear";
+}
+
+/* ============ STATE & RENDER ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const st={car:null,trk:null,lay:0,rev:false,race:"sprint",limit:700,make:"All",q:"",tq:"",reg:"All",laps:5,lapsManual:false,tyre:"auto",fuel:1,wear:1,country:"All",dt:"All",cls:"All",era:"All",body:"All",sort:"name",view:"pick",weather:"auto",cond:"auto",temp:"auto",surf:"All"};
+let lastPlan="";
+/* ---- user preferences: units and appearance ---- */
+const PREF={speed:"kph",weight:"kg",theme:"auto"};
+try{Object.assign(PREF,JSON.parse(localStorage.getItem("gt7prefs")||"{}"))}catch(_){}
+function savePrefs(){try{localStorage.setItem("gt7prefs",JSON.stringify(PREF))}catch(_){}}
+const spd=k=>PREF.speed==="mph"?Math.round(k*0.621371)+" mph":Math.round(k)+" km/h";
+const spdAlt=k=>PREF.speed==="mph"?Math.round(k)+" km/h":Math.round(k*0.621371)+" mph";
+const wgt=kg=>PREF.weight==="lb"?Math.round(kg*2.20462)+" lb":Math.round(kg)+" kg";
+/* approximate sunrise and sunset for today: mid-latitude (38 N), local clock, daylight saving detected */
+function sunTimes(d){
+  const start=new Date(d.getFullYear(),0,0),N=Math.floor((d-start)/864e5);
+  const decl=23.44*Math.sin(2*Math.PI*(284+N)/365)*Math.PI/180,lat=38*Math.PI/180;
+  const H=Math.acos(clamp(-Math.tan(lat)*Math.tan(decl),-1,1))*180/Math.PI/15;
+  const jan=new Date(d.getFullYear(),0,1).getTimezoneOffset(),jul=new Date(d.getFullYear(),6,1).getTimezoneOffset();
+  const dst=d.getTimezoneOffset()<Math.max(jan,jul)?1:0;
+  const noon=12.1+dst;
+  return{rise:noon-H,set:noon+H};
+}
+const hhmm=h=>{const m=Math.round(h*60);return String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0")};
+function applyTheme(){
+  let t=PREF.theme;
+  const now=new Date(),sun=sunTimes(now),h=now.getHours()+now.getMinutes()/60;
+  if(t==="auto")t=(h>=sun.rise+0.25&&h<sun.set-0.25)?"light":"dark";
+  document.documentElement.setAttribute("data-theme",t);
+  const n=document.querySelector("#themenote");
+  if(n)n.textContent=PREF.theme==="auto"?`Light by day, dark from about ${hhmm(sun.set-0.25)} until ${hhmm(sun.rise+0.25)}. Times are approximate.`:"";
+}
+function renderPrefs(){
+  document.querySelectorAll(".seg").forEach(g=>{const k=g.dataset.pref;g.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",PREF[k]===b.dataset.v))});
+}
+applyTheme();setInterval(applyTheme,60000);
+function startState(){
+  st.car=CARS.find(c=>c.make==="Honda"&&c.name==="NSX 2017");
+  st.trk=TRACKS.find(t=>t.id==="suzuka");
+}
+const PRESETS=[0,400,500,550,600,650,700,750,800,900];
+
+const COUNTRY={"Abarth":"Italy","Afeela":"Japan","Alfa Romeo":"Italy","Alpine":"France","AMG":"Germany","Amuse":"Japan","Aston Martin":"United Kingdom","Audi":"Germany","Autobianchi":"Italy","BAC":"United Kingdom","BMW":"Germany","Bugatti":"France","Bulgari":"Italy","Caterham":"United Kingdom","Chaparral":"USA","Chevrolet":"USA","Chris Holstrom Concepts":"USA","Citroen":"France","Daihatsu":"Japan","De Tomaso":"Italy","DMC":"USA","Dodge":"USA","DS Automobile":"France","Eckert's Rod & Custom":"USA","Ferrari":"Italy","FIAT":"Italy","Ford":"USA","Genesis":"South Korea","Gran Turismo":"Japan","Greddy":"Japan","Greening Auto Company":"USA","Honda":"Japan","Hyundai":"South Korea","Infiniti":"Japan","ItalDesign":"Italy","Jaguar":"United Kingdom","Jeep":"USA","KTM":"Austria","Lamborghini":"Italy","Lancia":"Italy","Lexus":"Japan","Maserati":"Italy","Mazda":"Japan","McLaren":"United Kingdom","Mercedes":"Germany","Mine's":"Japan","MINI":"United Kingdom","Mitsubishi":"Japan","NISMO":"Japan","Nissan":"Japan","Opel":"Germany","Pagani":"Italy","Peugeot":"France","Plymouth":"USA","Polestar":"Sweden","Pontiac":"USA","Porsche":"Germany","Radical":"United Kingdom","Roadster Shop":"USA","RE Amemiya":"Japan","Renault":"France","Ruf":"Germany","Shelby":"USA","Skoda":"Czech Republic","Subaru":"Japan","Super Formula":"Japan","Suzuki":"Japan","Tesla":"USA","Toyota":"Japan","TVR":"United Kingdom","Volkswagen":"Germany","Volvo":"Sweden","Wicked Fabrication":"USA","Xiaomi":"China","Yangwang":"China","Zagato":"Italy","Garage RCR":"Other"};
+CARS.forEach(c=>{c.country=COUNTRY[c.make]||"Other"});
+const ERAS=[["pre1960","Before 1960",y=>y<1960],["1960s","1960s",y=>y>=1960&&y<1970],["1970s","1970s",y=>y>=1970&&y<1980],["1980s","1980s",y=>y>=1980&&y<1990],["1990s","1990s",y=>y>=1990&&y<2000],["2000s","2000s",y=>y>=2000&&y<2010],["2010s","2010s",y=>y>=2010&&y<2020],["2020s","2020s and newer",y=>y>=2020]];
+const CLASSES=[
+ ["Race group",[["Gr.1","Gr.1"],["Gr.3","Gr.3"],["Gr.4","Gr.4"],["Gr.B","Gr.B (rally)"]]],
+ ["Type",[["vgt","Vision Gran Turismo"],["open","Formula and open-wheel"],["race","All race cars"],["road","Road cars only"]]],
+ ["PP class",[["N100","N100"],["N200","N200"],["N300","N300"],["N400","N400"],["N500","N500"],["N600","N600"],["N700","N700"],["N800","N800"],["N900","N900"],["N1000","N1000"]]]
+];
+function carPass(c,q){
+  if(st.country!=="All"&&c.country!==st.country)return false;
+  if(st.make!=="All"&&c.make!==st.make)return false;
+  if(st.dt!=="All"&&c.dt!==st.dt)return false;
+  const k=st.cls;
+  if(k!=="All"){
+    if(/^Gr\./.test(k)){if(c.cat!==k)return false}
+    else if(k==="vgt"){if(!c.vgt)return false}
+    else if(k==="open"){const b=c.body||(c.body=bodyType(c));if(b!=="open"&&b!=="kart")return false}
+    else if(k==="race"){if(!c.isRace)return false}
+    else if(k==="road"){if(c.isRace)return false}
+    else if(c.cat!==k)return false;
+  }
+  if(st.era!=="All"){
+    const e=ERAS.find(x=>x[0]===st.era);
+    if(st.era==="none"){if(c.year)return false}
+    else if(!c.year||!e[2](c.year))return false;
+  }
+  if(st.body!=="All"){const b=c.body||(c.body=bodyType(c));if(b!==st.body)return false}
+  if(q&&!(c.full.toLowerCase().includes(q)||c.cat.toLowerCase().includes(q)||c.country.toLowerCase().includes(q)))return false;
+  return true;
+}
+function fillMakes(){
+  const pool=CARS.filter(c=>st.country==="All"||c.country===st.country);
+  const ms=[...new Set(pool.map(c=>c.make))];
+  if(st.make!=="All"&&!ms.includes(st.make))st.make="All";
+  $("#carmake").innerHTML=`<option value="All">All (${ms.length})</option>`+ms.map(m=>`<option value="${esc(m)}">${esc(m)}</option>`).join("");
+  $("#carmake").value=st.make;
+}
+function initFilters(){
+  const cs=[...new Set(CARS.map(c=>c.country))].sort();
+  $("#carcountry").innerHTML=`<option value="All">All (${cs.length})</option>`+cs.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  $("#carclass").innerHTML=`<option value="All">All classes</option>`+CLASSES.map(g=>`<optgroup label="${g[0]}">${g[1].map(o=>`<option value="${o[0]}">${o[1]}</option>`).join("")}</optgroup>`).join("");
+  $("#carera").innerHTML=`<option value="All">All eras</option>`+ERAS.map(e=>`<option value="${e[0]}">${e[1]}</option>`).join("")+`<option value="none">Year not listed</option>`;
+  const bodies=[["coupe","Coupe"],["wedge","Mid-engine"],["hatch","Hatchback"],["sedan","Saloon"],["suv","SUV or van"],["classic","Classic"],["open","Open-wheel"],["kart","Kart"]];
+  $("#carbody").innerHTML=`<option value="All">All bodies</option>`+bodies.map(b=>`<option value="${b[0]}">${b[1]}</option>`).join("");
+  fillMakes();
+}
+function renderCars(){
+  const q=st.q.trim().toLowerCase();
+  const list=CARS.filter(c=>carPass(c,q));
+  const sk=st.sort;
+  if(sk!=="name")list.sort((a,b)=>sk==="pp-desc"?b.pp-a.pp:sk==="pp-asc"?a.pp-b.pp:sk==="year-desc"?(b.year||0)-(a.year||0):(a.year||9999)-(b.year||9999));
+  $("#dtchips").innerHTML=["All","FR","MR","RR","FF","4WD"].map(d=>`<button class="chip sm" data-d="${d}" aria-pressed="${st.dt===d}">${d==="4WD"?"4WD / AWD":d}</button>`).join("");
+  $("#carcount").textContent=list.length+" / "+CARS.length;
+  $("#carlist").innerHTML=list.map(c=>`<button class="row" role="listitem" data-car="${c.id}" aria-pressed="${st.car&&st.car.id===c.id}">
+    <span class="t">${esc(c.make)} ${esc(c.name)}${c.isNew?'<span class="tag new">1.72</span>':''}</span>
+    <span class="s">${c.dt} &middot; ${c.cat}</span><span class="r mono">${c.pp} PP</span></button>`).join("")||'<p class="fine" style="padding:12px 0">No car matches that search.</p>';
+}
+function renderTracks(){
+  const q=st.tq.trim().toLowerCase();
+  const list=TRACKS.filter(t=>(st.reg==="All"||t.reg===st.reg)&&(st.surf==="All"||t.surf===st.surf)&&(!q||(t.name+" "+t.c).toLowerCase().includes(q)));
+  $("#trkcount").textContent=list.length+" / "+TRACKS.length;
+  $("#trklist").innerHTML=list.map(t=>`<button class="row" role="listitem" data-trk="${t.id}" aria-pressed="${st.trk.id===t.id}">
+    <span class="t">${esc(t.name)}${t.isNew?'<span class="tag new">1.72</span>':''}</span>
+    <span class="s">${esc(t.c)} &middot; ${t.surf==="tarmac"?"Tarmac":t.surf==="dirt"?"Dirt":"Snow"}${t.fict?" &middot; Original":""}</span>
+    <span class="r mono">${t.lay.length} lay.</span></button>`).join("")||'<p class="fine" style="padding:12px 0">No circuit matches.</p>';
+  $("#regions").innerHTML=REGIONS.map(r=>`<button class="chip sm" data-reg="${r}" aria-pressed="${st.reg===r}">${r}</button>`).join("");
+  $("#layouts").innerHTML=st.trk.lay.map((l,i)=>`<button class="chip sm" data-lay="${i}" aria-pressed="${st.lay===i}">${esc(l.n)}</button>`).join("");
+  $("#surfchips").innerHTML=[["All","All"],["tarmac","Tarmac"],["dirt","Dirt"],["snow","Snow"]].map(o=>`<button class="chip sm" data-surf="${o[0]}" aria-pressed="${st.surf===o[0]}">${o[1]}</button>`).join("");
+  $("#revbtn").setAttribute("aria-pressed",st.rev);
+}
+function renderRace(){
+  $("#raceopts").innerHTML=RACES.map(r=>`<button class="opt" data-race="${r.id}" aria-pressed="${st.race===r.id}"><span class="dot"></span><span><b>${r.n}</b><span>${r.d}</span></span></button>`).join("");
+  $("#limchips").innerHTML=PRESETS.map(p=>`<button class="chip sm" data-lim="${p}" aria-pressed="${(st.limit||0)===p}">${p?p:"None"}</button>`).join("");
+  $("#limnum").value=st.limit||"";
+  $("#limrange").value=st.limit||1100;
+}
+
+function trackSvg(t,l,rev){
+  let P=(l.pts||t.pts).map(p=>p.slice());
+  if(l.cut){
+    const n=P.length,[a,b]=l.cut;const rm=new Set();
+    for(let i=(a+1)%n;i!==b%n&&rm.size<n-4;i=(i+1)%n)rm.add(i);
+    P=P.filter((_,i)=>!rm.has(i));
+  }
+  if(rev||l.rev)P=P.slice().reverse();
+  // fit to box
+  const xs=P.map(p=>p[0]),ys=P.map(p=>p[1]);
+  const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const s=76/Math.max(x1-x0,y1-y0,1);
+  const cx=(x0+x1)/2,cy=(y0+y1)/2;
+  P=P.map(p=>[50+(p[0]-cx)*s,50+(p[1]-cy)*s]);
+  const n=P.length;
+  const f=v=>v.toFixed(2);
+  const segs=[];let d=`M${f(P[0][0])},${f(P[0][1])}`;
+  for(let i=0;i<n;i++){
+    const p0=P[(i-1+n)%n],p1=P[i],p2=P[(i+1)%n],p3=P[(i+2)%n];
+    segs.push(`C${f(p1[0]+(p2[0]-p0[0])/6)},${f(p1[1]+(p2[1]-p0[1])/6)} ${f(p2[0]-(p3[0]-p1[0])/6)},${f(p2[1]-(p3[1]-p1[1])/6)} ${f(p2[0])},${f(p2[1])}`);
+  }
+  d+=segs.join("")+"Z";
+  // three sectors split by chord length
+  const cl=P.map((p,i)=>{const q=P[(i+1)%n];return Math.hypot(q[0]-p[0],q[1]-p[1])});
+  const tot=cl.reduce((u,v)=>u+v,0);let acc=0;const sec=[[],[],[]];
+  for(let i=0;i<n;i++){const mid=(acc+cl[i]/2)/tot;sec[Math.min(2,Math.floor(mid*3))].push(i);acc+=cl[i]}
+  const OP=[1,.55,.27];
+  const secPaths=sec.map((idx,k)=>{
+    if(!idx.length)return"";
+    let dd=`M${f(P[idx[0]][0])},${f(P[idx[0]][1])}`;
+    idx.forEach(i=>dd+=segs[i]);
+    return `<path class="draw" pathLength="1" d="${dd}" fill="none" stroke="var(--fg)" stroke-opacity="${OP[k]}" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="butt"/>`;
+  }).join("");
+  const ccx=P.reduce((u,p)=>u+p[0],0)/n,ccy=P.reduce((u,p)=>u+p[1],0)/n;
+  const secLbl=sec.map((idx,k)=>{
+    if(!idx.length)return"";
+    const p=P[idx[Math.floor(idx.length/2)]];let vx=p[0]-ccx,vy=p[1]-ccy;const m=Math.hypot(vx,vy)||1;
+    return `<text x="${f(p[0]+vx/m*5.2)}" y="${f(p[1]+vy/m*5.2+1.3)}" text-anchor="middle" font-size="4" font-family="IBM Plex Mono,monospace" fill="var(--fg)" opacity=".8">S${k+1}</text>`;
+  }).join("");
+  const a=P[0],b=P[1];let dx=b[0]-a[0],dy=b[1]-a[1];const m=Math.hypot(dx,dy)||1;dx/=m;dy/=m;
+  const nx=-dy,ny=dx;
+  const sf=`<line x1="${a[0]+nx*4}" y1="${a[1]+ny*4}" x2="${a[0]-nx*4}" y2="${a[1]-ny*4}" stroke="var(--accent)" stroke-width="1.6"/>`;
+  const ar=`<polygon points="${a[0]+dx*2.2+nx*2.6},${a[1]+dy*2.2+ny*2.6} ${a[0]+dx*2.2-nx*2.6},${a[1]+dy*2.2-ny*2.6} ${a[0]+dx*6.4},${a[1]+dy*6.4}" fill="var(--accent)"/>`;
+  return `<svg viewBox="0 0 100 100" role="img" aria-label="Schematic outline of ${esc(t.name)}, ${esc(l.n)}">
+   <path d="${d}" fill="none" stroke="var(--fg)" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round" opacity=".14"/>
+   ${secPaths}${secLbl}
+   ${sf}${ar}
+   <g class="lapcar"><polygon points="3.6,0 -2.6,2.5 -2.6,-2.5" fill="var(--accent)" stroke="var(--bg)" stroke-width=".8" stroke-linejoin="round"/><animateMotion dur="${Math.max(7,Math.min(26,(+(l.len||t.len)||5)*2.4)).toFixed(1)}s" repeatCount="indefinite" rotate="auto" path="${d}"/></g></svg>`;
+}
+
+let lastText="";
+function row(label,f,r,h){
+  return `<tr><th scope="row">${label}</th><td class="v">${f}</td><td class="v">${r===undefined?"":r}</td><td class="h">${h||""}</td></tr>`;
+}
+function effWx(){
+  if(st.weather!=="auto")return st.weather;
+  const wl=wetLvl(st.race);return wl>=.8?"storm":wl>=.4?"rain":"clear";
+}
+function wxIcon(k){
+  const sw='stroke="var(--fg)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+  const cloud='<path d="M7 17h10.5a3.5 3.5 0 0 0 .4-7 5 5 0 0 0-9.6-1.2A4 4 0 0 0 7 17z" '+sw+'/>';
+  const drops=n=>Array.from({length:n},(_,i)=>{const x=8+i*(8/(n-1||1));return `<line x1="${x}" y1="19.5" x2="${x-1.4}" y2="22.5" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"/>`}).join("");
+  const body={
+    clear:'<circle cx="12" cy="12" r="4.2" '+sw+'/>'+[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180;return `<line x1="${(12+Math.cos(r)*6.6).toFixed(1)}" y1="${(12+Math.sin(r)*6.6).toFixed(1)}" x2="${(12+Math.cos(r)*8.8).toFixed(1)}" y2="${(12+Math.sin(r)*8.8).toFixed(1)}" ${sw}/>`}).join(""),
+    cloud:cloud,
+    rain:'<g transform="translate(0,-2.5)">'+cloud+'</g>'+drops(2),
+    storm:'<g transform="translate(0,-2.5)">'+cloud+'</g>'+drops(3)
+  }[k];
+  return `<svg viewBox="0 0 24 24" aria-hidden="true">${body}</svg>`;
+}
+function wxBadge(){
+  const k=effWx(),name={clear:"Clear",cloud:"Overcast",rain:"Light rain",storm:"Heavy rain"}[k];
+  const tp=st.temp==="auto"?"":" &middot; "+({cold:"Cold",mild:"Mild",warm:"Warm",hot:"Hot"})[st.temp];
+  return `<div class="wx" role="img" aria-label="Weather: ${name}">${wxIcon(k)}<span>${name}${tp}</span></div>`;
+}
+function renderStart(){
+  const car=st.car,trk=st.trk;if(!car||!trk)return;
+  const lay=trk.lay[st.lay]||trk.lay[0],race=RACES.find(r=>r.id===st.race);
+  const wx={clear:"Clear",cloud:"Overcast",rain:"Light rain",storm:"Heavy rain"}[effWx()];
+  $("#startsum").innerHTML=`<b>${esc(car.make)} ${esc(car.name)}</b> <span class="mute">&middot; ${car.pp} PP</span><br><b>${esc(trk.name)}</b> <span class="mute">&middot; ${esc(lay.n)}${st.rev?" (reverse)":""}</span><br><span class="mute">${esc(race.n)} &middot; ${st.laps} laps &middot; ${wx}${st.limit?" &middot; PP limit "+st.limit:""}</span>`;
+}
+/* ---- garage: saved setups, kept in this browser ---- */
+const GKEY="gt7garage";
+let GAR=[];
+try{GAR=JSON.parse(localStorage.getItem(GKEY)||"[]");if(!Array.isArray(GAR))GAR=[]}catch(_){GAR=[]}
+function saveGarage(){try{localStorage.setItem(GKEY,JSON.stringify(GAR));return true}catch(_){return false}}
+const SNAP_KEYS=["lay","rev","race","limit","laps","lapsManual","tyre","fuel","wear","weather","cond","temp"];
+function snapKey(o){return [o.car,o.trk,...SNAP_KEYS.map(k=>o.s[k])].join("|")}
+function currentSnap(){const s={};SNAP_KEYS.forEach(k=>s[k]=st[k]);return{car:st.car.full,trk:st.trk.id,s}}
+function inGarage(){const k=snapKey(currentSnap());return GAR.find(g=>snapKey(g)===k)}
+function updateSaveBtn(){
+  const b=$("#savebtn");if(!b)return;
+  const g=inGarage();
+  b.lastChild.textContent=g?"Saved in garage":"Save to garage";
+  b.setAttribute("aria-pressed",!!g);
+}
+function renderGCount(){$("#gcount").textContent=GAR.length?String(GAR.length):""}
+function addToGarage(){
+  if(inGarage()){showView("garage");return}
+  const snap=currentSnap(),lay=st.trk.lay[st.lay]||st.trk.lay[0],race=RACES.find(r=>r.id===st.race);
+  const wl=wetLvl(st.race);
+  Object.assign(snap,{id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),saved:Date.now(),
+    name:st.car.make+" "+st.car.name+" at "+st.trk.name,
+    meta:{car:st.car.make+" "+st.car.name,pp:st.car.pp,dt:st.car.dt,track:st.trk.name,layout:lay.n+(st.rev?" (reverse)":""),race:race.n,cond:wl>=.8?"Wet":wl>=.4?"Damp":"Dry"},
+    text:lastText+(lastPlan?"\n"+lastPlan:"")});
+  GAR.unshift(snap);
+  const ok=saveGarage();
+  renderGCount();updateSaveBtn();
+  const fb=$("#copyfb");fb.textContent=ok?"Saved to your garage.":"Saved for this visit only. Your browser is blocking storage, so it will be gone after you close the page.";
+}
+function openFromGarage(id){
+  const g=GAR.find(x=>x.id===id);if(!g)return;
+  const car=CARS.find(c=>c.full===g.car),trk=TRACKS.find(t=>t.id===g.trk);
+  if(!car||!trk){return}
+  st.car=car;st.trk=trk;Object.assign(st,g.s);
+  if(!trk.lay[st.lay])st.lay=0;
+  renderAll();showView("setup");
+}
+function fmtDate(t){try{return new Date(t).toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"})}catch(_){return""}}
+function renderGarage(){
+  $("#gtotal").textContent=GAR.length+(GAR.length===1?" setup":" setups");
+  if(!GAR.length){$("#glist").innerHTML='<p class="gempty">Your garage is empty. Open a setup sheet and press <b>Save to garage</b> to keep it here.</p>';return}
+  $("#glist").innerHTML=GAR.map(g=>{
+    const m=g.meta||{},ok=CARS.some(c=>c.full===g.car)&&TRACKS.some(t=>t.id===g.trk);
+    return `<div class="gcard" data-gid="${esc(g.id)}">
+      <textarea class="gname" rows="2" aria-label="Setup name" maxlength="80">${esc(g.name)}</textarea>
+      <div class="gmeta"><b>${esc(m.car||g.car)}</b> &middot; ${m.pp||""} PP &middot; ${esc(m.dt||"")}<br>
+        <b>${esc(m.track||"")}</b> &middot; ${esc(m.layout||"")}<br>
+        ${esc(m.race||"")} &middot; ${esc(m.cond||"")}${g.s.limit?" &middot; PP limit "+g.s.limit:""} &middot; ${g.s.laps} laps<br>
+        <span>Saved ${fmtDate(g.saved)}</span></div>
+      <div class="gbtns">${ok?'<button class="open" data-gact="open">Open setup</button>':'<span class="fine">Car or track no longer listed</span>'}<button data-gact="copy">Copy</button><button data-gact="del">Delete</button><span class="fine gfb" style="margin:0"></span></div>
+    </div>`}).join("");
+}
+let prevView="pick";
+function showView(v){
+  if(v==="garage"&&st.view!=="garage")prevView=st.view||"pick";
+  st.view=v;
+  $("#pickview").hidden=v!=="pick";
+  $("#result").hidden=v!=="setup";
+  $("#garage").hidden=v!=="garage";
+  if(v==="garage")renderGarage();
+  try{window.scrollTo({top:0,behavior:"smooth"})}catch(_){window.scrollTo(0,0)}
+}
+function renderResult(){
+  const car=st.car,trk=st.trk,lay=trk.lay[st.lay]||trk.lay[0];
+  const t=effTrack(trk,lay);
+  if(!st.lapsManual)st.laps=defLaps(car,t,st.race);
+  renderCond(car,t);
+  const S=tune(car,t,st.race);
+  const lim=st.limit||0;
+  const P=partsPlan(car,t,st.race,lim,S.tyre.name.split(" for ")[0].split(" / ")[0]);
+  const race=RACES.find(r=>r.id===st.race);
+  const topMph=Math.round(S.top*0.621371);
+  const lenTxt=lay.len?lay.len.toFixed(2)+" km":"n/a";
+  const proj=P.pp;
+  const status=!lim?`<span class="status">No cap set</span>`:P.baseOver?`<span class="status over">Stock car is ${r1(car.pp-lim)} PP over the limit</span>`:proj>lim?`<span class="status over">${r1(proj-lim)} PP over</span>`:`<span class="status ok">${r1(lim-proj)} PP spare</span>`;
+  const barMax=Math.max(lim||proj,proj,car.pp)*1.05;
+  const pc=v=>Math.round(v*100)+"%";
+  const aeroRow=S.aero?row("Downforce (front / rear)",S.aero[0],S.aero[1],"Lower on fast tracks, higher where corners dominate."):row("Downforce (% of slider)",pc(S.aeroPct),pc(S.aeroRearPct),"Needs a wing or aero kit installed.");
+  const aeroBox=`<div class="aerobox"><div class="lab">Recommended downforce</div><div class="big">${S.aeroLvl}</div>
+    <div class="scale" aria-hidden="true"><i style="width:${pc(S.aeroPct)}"></i><u style="left:${pc(S.aeroPct)}"></u></div>
+    <div class="ends"><span>Low drag</span><span>Max grip</span></div>
+    <p class="fine" style="margin:8px 0 0">${esc(S.aeroWhy)} ${S.aero?"Numbers are guide values; set the sliders to the same position in your car's range.":"Your car has no aero by default. Fit a rear wing or aero kit from the shop if offered, then set the slider to about "+pc(S.aeroPct)+" of its range. Without one, nothing to adjust."}</p></div>`;
+  const stratHtml_=stratHtml(car,t,S,st.race);
+  const profHtml_=profHtml(car,trk,lay,t,S,st.race);
+  const carHtml=carPicHtml(car);
+  const html=`
+  <div class="backbar"><button class="mini" id="backbtn" type="button">&larr; Change car, track or conditions</button><span class="fine" style="margin:0">Setup sheet</span></div>
+  <div class="rhead">
+    <h2>${esc(car.make)} ${esc(car.name)}<br><span style="color:var(--accent)">${esc(trk.name)}</span></h2>
+    <div class="sub">${esc(lay.n)}${st.rev?" (reverse)":""} &middot; ${esc(race.n)}${wetLvl(st.race)>=.4?" &middot; "+(wetLvl(st.race)>=.8?"Wet":"Damp"):""}${lim?" &middot; PP limit "+lim:""}</div>
+  </div>
+  <div class="rgrid">
+    <div class="map">
+      <div class="mapbox">${trackSvg(trk,lay,st.rev)}${wxBadge()}</div>
+      <p class="mapnote">Schematic outline. Red line marks start and finish, arrow shows direction. Sectors S1 (dark), S2 (mid), S3 (light) are equal thirds of the lap, not official timing sectors. Not a surveyed map.</p>
+      ${carHtml}
+      <div class="stats">
+        <div class="stat"><span class="lab">Drive</span><b>${car.dt}</b></div>
+        <div class="stat"><span class="lab">Class</span><b>${car.cat}</b></div>
+        <div class="stat"><span class="lab">Length</span><b class="mono">${lenTxt}</b></div>
+        <div class="stat"><span class="lab">Surface</span><b>${trk.surf==="tarmac"?"Tarmac":trk.surf==="dirt"?"Dirt":"Snow"}</b></div>
+      </div>
+      <div class="ppbar" aria-hidden="true"><i style="width:${(proj/barMax*100).toFixed(1)}%"></i>${lim?`<u style="left:${(lim/barMax*100).toFixed(1)}%"></u>`:""}</div>
+      <div class="mono" style="font-size:13px">${car.pp} PP stock &rarr; <b>${proj} PP</b> with parts &middot; ${status}</div>
+    </div>
+    <div class="sheet">
+      <div class="tablewrap">
+      <div class="grp"><h3>Tyres<span>${esc(race.n)}</span></h3>
+        <table><tr><th scope="row">Compound</th><td class="v" style="white-space:normal;text-align:left">${esc(S.tyre.name)}</td></tr></table>
+        <p class="fine" style="margin:6px 0 0">${esc(S.tyre.why)}</p></div>
+      <div class="grp"><h3>Suspension<span>front / rear</span></h3><table>
+        <tr class="colh"><th></th><th class="c">Front</th><th class="c">Rear</th><th></th></tr>
+        ${row("Ride height (mm)",S.rh[0],S.rh[1],"Raised for bumps. Rear slightly higher for aero rake.")}
+        ${row("Anti-roll bar",S.arb[0],S.arb[1],({FF:"Stiffer rear helps the nose rotate.",FR:"Softer rear keeps traction on exit.",MR:"Softer rear stabilises the tail.",RR:"Softer rear tames the pendulum effect.","4WD":"Even split, then trimmed by track."})[car.dt])}
+        ${row("Damping, compression (%)",S.dampC[0],S.dampC[1],"Lower on bumpy circuits.")}
+        ${row("Damping, extension (%)",S.dampE[0],S.dampE[1],"Controls how fast the body settles.")}
+        ${row("Natural frequency (Hz)",f2(S.nf[0]),f2(S.nf[1]),"Stiffer for downforce and smooth tarmac.")}
+        ${row("Camber (deg)",f1(S.camber[0]),f1(S.camber[1]),"More on technical tracks for cornering grip.")}
+        ${row("Toe",(S.toe[0]<0?"out ":S.toe[0]>0?"in ":"")+f2(Math.abs(S.toe[0])),(S.toe[1]<0?"out ":"in ")+f2(Math.abs(S.toe[1])),"Rear toe-in for stability.")}
+      </table></div>
+      <div class="grp"><h3>Aerodynamics<span>${S.aero?"adjustable":"needs aero kit"}</span></h3><table>${aeroRow}</table>${aeroBox}</div>
+      <div class="grp"><h3>Differential<span>${car.dt}</span></h3><table>
+        <tr class="colh"><th></th><th class="c">${car.dt==="4WD"?"Rear":"Value"}</th><th class="c">${car.dt==="4WD"?"Front":""}</th><th></th></tr>
+        ${row("Initial torque",S.lsd[0],car.dt==="4WD"?S.lsdF[0]:"","Higher locks sooner at neutral throttle.")}
+        ${row("Acceleration sensitivity",S.lsd[1],car.dt==="4WD"?S.lsdF[1]:"","Lower if the inside wheel spins on exit.")}
+        ${row("Braking sensitivity",S.lsd[2],car.dt==="4WD"?S.lsdF[2]:"","Higher adds stability under braking.")}
+        ${car.dt==="4WD"?row("Front : rear torque split",S.split,"","More rear bias helps turn-in."):""}
+      </table></div>
+      <div class="grp"><h3>Transmission and brakes</h3><table>
+        ${row("Top speed target",spd(S.top),spdAlt(S.top),"Set so top gear peaks at the end of the longest straight.")}
+        ${row("Brake balance (front : rear)",(S.brake>0?"+":"")+S.brake,"","Move toward the rear if the front locks first.")}
+        ${row("Traction control",S.tcs,"","Raise it in the wet or while learning the car.")}
+        ${row("Active stability management",S.asm?"Weak":"Off","","Off for race cars and experienced drivers.")}
+      </table></div>
+      </div>
+      ${S.notes.length?`<p class="fine">${S.notes.map(esc).join(" ")}</p>`:""}
+      <div class="actions"><button class="btn" id="copybtn">Copy setup</button><button class="btn ghost" id="savebtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M6.5 20v-7.5h11V20"/><path d="M6.5 15h11M6.5 17.5h11"/></svg>Save to garage</button><span class="fine" id="copyfb"></span></div>
+    </div>
+  </div>
+  ${stratHtml_}
+  ${profHtml_}
+  <div class="parts">
+    <div class="grp" style="margin-bottom:8px"><h3>Parts to buy<span>in order of value${lim?" &middot; fitted under "+lim+" PP":""}</span></h3></div>
+    ${P.baseOver||P.rest?`<p class="fine" style="margin:0 0 12px"><b>Over the PP limit.</b> ${P.baseOver?"The stock car already exceeds "+lim+" PP.":"The full list would reach "+proj+" PP."} Fit a Power Restrictor at <span class="mono">${P.rest.pct}%</span> to remove about ${P.rest.over} PP, or add roughly ${wgt(clamp(P.rest.over*6,5,200))} of ballast and move it to the rear for balance. The ballast figure is a rough guide.</p>`:""}
+    <div class="pl head"><span>#</span><span>Part</span><span class="num t">Cost</span><span class="num">+PP</span><span class="num">Running</span></div>
+    ${(()=>{let run=car.pp,i=0;return P.plan.map(p=>{if(p.buy)run+=p.g;i++;
+      const dots="●".repeat(p.t)+"<s>"+"●".repeat(3-p.t)+"</s>";
+      return `<div class="pl ${p.buy?"":"skip"}"><span class="i">${String(i).padStart(2,"0")}</span><span class="nm"><b>${esc(p.n)}</b><span>${p.buy?esc(p.why):"No PP room under your limit. Skip it or raise the limit."}</span></span><span class="num t cost" aria-label="Cost ${p.t} of 3">${dots}</span><span class="num">${p.buy&&p.g?"+"+p.g:p.g?"&ndash;":"0"}</span><span class="num">${p.buy?r1(run):"&ndash;"}</span></div>`}).join("")})()}
+    <p class="fine" style="margin-top:12px">Cost dots show relative price: one dot is cheap, three is expensive. PP gains are estimates scaled to the car's class, so confirm the live number in the Tuning Shop before you pay.${car.isRace?" Gr.-class and Vision GT cars are pre-tuned, so the shop offers little beyond tyres, ballast and the restrictor.":""}</p>
+  </div>`;
+  $("#result").innerHTML=html;
+  // clipboard text
+  lastText=[`${car.make} ${car.name} · ${trk.name} (${lay.n}${st.rev?", reverse":""}) · ${race.n}${lim?" · "+lim+" PP":""}`,
+   `Tyres: ${S.tyre.name}`,
+   `Ride height F/R: ${S.rh[0]}/${S.rh[1]} mm`,`ARB F/R: ${S.arb[0]}/${S.arb[1]}`,
+   `Damping comp F/R: ${S.dampC[0]}/${S.dampC[1]}  ext F/R: ${S.dampE[0]}/${S.dampE[1]}`,
+   `Natural freq F/R: ${f2(S.nf[0])}/${f2(S.nf[1])} Hz`,`Camber F/R: ${f1(S.camber[0])}/${f1(S.camber[1])}`,`Toe F/R: ${f2(S.toe[0])}/${f2(S.toe[1])}`,
+   S.aero?`Downforce F/R: ${S.aero[0]}/${S.aero[1]} (${S.aeroLvl})`:`Downforce: ${S.aeroLvl}, about ${pc(S.aeroPct)} of slider range (needs aero kit)`,
+   `Conditions: ${wetLvl(st.race)>=.8?"wet":wetLvl(st.race)>=.4?"damp":"dry"}, ${st.temp==="auto"?"mild":TEMPS[st.temp][0]}`,
+   `LSD init/accel/brake: ${S.lsd.join("/")}${car.dt==="4WD"?`  front: ${S.lsdF.join("/")}  split ${S.split}`:""}`,
+   `Top speed: ${spd(S.top)}`,`Brake balance: ${S.brake}`,
+   `Parts: ${P.plan.filter(p=>p.buy).map(p=>p.n).join(", ")}`,
+   P.rest?`Power restrictor: ${P.rest.pct}%`:`Projected PP: ${proj}`].join("\n");
+  renderStart();
+  updateSaveBtn();
+}
+function renderAll(){renderCars();renderTracks();renderRace();renderResult()}
+
+/* events */
+document.addEventListener("click",e=>{
+  if(!e.target.closest(".setwrap")){const p=$("#setpanel");if(p&&!p.hidden){p.hidden=true;$("#setbtn").setAttribute("aria-expanded","false")}}
+  const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.car!==undefined){st.car=CARS.find(c=>c.id===+b.dataset.car);renderCars();renderResult()}
+  else if(b.dataset.trk){st.trk=TRACKS.find(t=>t.id===b.dataset.trk);st.lay=0;renderTracks();renderResult()}
+  else if(b.dataset.lay!==undefined){st.lay=+b.dataset.lay;renderTracks();renderResult()}
+  else if(b.dataset.reg){st.reg=b.dataset.reg;renderTracks()}
+  else if(b.dataset.surf){st.surf=b.dataset.surf;renderTracks()}
+  else if(b.id==="revbtn"){st.rev=!st.rev;renderTracks();renderResult()}
+  else if(b.dataset.race){st.race=b.dataset.race;st.fuel=st.wear=(st.race==="endurance"?2:1);st.lapsManual=false;renderRace();renderResult()}
+  else if(b.dataset.lim!==undefined){st.limit=+b.dataset.lim;renderRace();renderResult()}
+  else if(b.id==="setbtn"){const p=$("#setpanel");p.hidden=!p.hidden;b.setAttribute("aria-expanded",!p.hidden);renderPrefs();applyTheme()}
+  else if(b.closest(".seg")){const g=b.closest(".seg");PREF[g.dataset.pref]=b.dataset.v;savePrefs();renderPrefs();applyTheme();renderResult()}
+  else if(b.id==="garbtn"){showView("garage")}
+  else if(b.id==="garback"){showView(prevView==="garage"?"pick":prevView)}
+  else if(b.id==="savebtn"){addToGarage()}
+  else if(b.dataset.gact){
+    const card=b.closest(".gcard"),id=card.dataset.gid,g=GAR.find(x=>x.id===id),fb=card.querySelector(".gfb");
+    if(!g)return;
+    if(b.dataset.gact==="open")openFromGarage(id);
+    else if(b.dataset.gact==="copy"){try{navigator.clipboard.writeText(g.name+"\n"+g.text).then(()=>{fb.textContent="Copied."},()=>{fb.textContent="Copy blocked."})}catch(_){fb.textContent="Copy blocked."}}
+    else if(b.dataset.gact==="del"){card.querySelector(".gbtns").innerHTML='<span class="fine" style="margin:0">Delete this setup?</span><button class="yes" data-gact="delyes">Delete</button><button data-gact="delno">Keep</button>'}
+    else if(b.dataset.gact==="delyes"){GAR=GAR.filter(x=>x.id!==id);saveGarage();renderGCount();renderGarage();updateSaveBtn()}
+    else if(b.dataset.gact==="delno"){renderGarage()}
+  }
+  else if(b.id==="startbtn"){renderResult();showView("setup")}
+  else if(b.id==="backbtn"){showView("pick")}
+  else if(b.id==="copybtn"){
+    const fb=$("#copyfb");
+    const done=()=>{fb.textContent="Copied."};
+    try{navigator.clipboard.writeText(lastText+(lastPlan?"\n"+lastPlan:"")).then(done,()=>{fb.textContent="Copy blocked. Select the table and copy by hand."})}
+    catch(_){fb.textContent="Copy blocked. Select the table and copy by hand."}
+  }
+});
+$("#carq").addEventListener("input",e=>{st.q=e.target.value;renderCars()});
+$("#trkq").addEventListener("input",e=>{st.tq=e.target.value;renderTracks()});
+$("#carmake").addEventListener("change",e=>{st.make=e.target.value;renderCars()});
+$("#carcountry").addEventListener("change",e=>{st.country=e.target.value;fillMakes();renderCars()});
+$("#carclass").addEventListener("change",e=>{st.cls=e.target.value;renderCars()});
+$("#carera").addEventListener("change",e=>{st.era=e.target.value;renderCars()});
+$("#carbody").addEventListener("change",e=>{st.body=e.target.value;renderCars()});
+$("#carsort").addEventListener("change",e=>{st.sort=e.target.value;renderCars()});
+$("#dtchips").addEventListener("click",e=>{const b=e.target.closest("button");if(!b||b.dataset.d===undefined)return;st.dt=b.dataset.d;renderCars()});
+$("#clearf").addEventListener("click",()=>{Object.assign(st,{q:"",country:"All",make:"All",cls:"All",era:"All",body:"All",dt:"All",sort:"name"});$("#carq").value="";$("#carcountry").value="All";$("#carclass").value="All";$("#carera").value="All";$("#carbody").value="All";$("#carsort").value="name";fillMakes();renderCars()});
+$("#limnum").addEventListener("input",e=>{const v=+e.target.value;st.limit=v>0?v:0;$("#limrange").value=st.limit||1100;$("#limchips").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",(+b.dataset.lim)===(st.limit||0)));renderResult()});
+$("#limrange").addEventListener("input",e=>{st.limit=+e.target.value>=1100?0:+e.target.value;$("#limnum").value=st.limit||"";$("#limchips").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",(+b.dataset.lim)===(st.limit||0)));renderResult()});
+
+$("#laps").addEventListener("input",e=>{const v=Math.round(+e.target.value);if(v>0){st.laps=Math.min(v,300);st.lapsManual=true;renderResult()}});
+$("#lapauto").addEventListener("click",()=>{st.lapsManual=false;renderResult()});
+$("#tyresel").addEventListener("change",e=>{st.tyre=e.target.value;renderResult()});
+$("#wxsel").addEventListener("change",e=>{st.weather=e.target.value;renderResult()});
+$("#condsel").addEventListener("change",e=>{st.cond=e.target.value;renderResult()});
+$("#tempsel").addEventListener("change",e=>{st.temp=e.target.value;renderResult()});
+$("#fuelsel").addEventListener("change",e=>{st.fuel=+e.target.value;renderResult()});
+$("#wearsel").addEventListener("change",e=>{st.wear=+e.target.value;renderResult()});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.classList&&e.target.classList.contains("gname")){e.preventDefault();e.target.blur();return}if(e.key==="Escape"){const p=$("#setpanel");if(!p.hidden){p.hidden=true;$("#setbtn").setAttribute("aria-expanded","false");$("#setbtn").focus()}}});
+renderPrefs();
+document.addEventListener("change",e=>{const i=e.target.closest&&e.target.closest(".gname");if(!i)return;const g=GAR.find(x=>x.id===i.closest(".gcard").dataset.gid);if(g){g.name=i.value.trim()||g.name;saveGarage()}});
+renderGCount();
+startState();
+initFilters();
+renderAll();
+</script>
+
+</body>
+</html>

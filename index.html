@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <style>body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>GT7 Setup Index</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -22,6 +22,8 @@
 :root[data-theme="dark"]{
   --bg:#0C0C0D; --fg:#F2F2F0; --mute:#8E8E93; --rule:#F2F2F0; --soft:#1A1A1C; --hair:#333336; --accent:#FF3B2F; --onaccent:#0C0C0D; --good:#4CC17D; --warn:#F0A040; color-scheme:dark}
 *{box-sizing:border-box}
+html{touch-action:pan-x pan-y;-webkit-text-size-adjust:100%}
+@media (max-width:760px){input,select,textarea{font-size:16px}}
 body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.45;
   padding-inline:0}
 .wrap{max-width:1280px;margin:0 auto;padding-block:0 64px;
@@ -165,6 +167,15 @@ th.c,td.c{text-align:right}
 .btn.ghost{background:none;color:var(--fg);border:1px solid var(--fg);padding:9px 17px}
 .btn.ghost:hover{background:var(--fg);color:var(--bg)}
 .btn.ghost svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round;vertical-align:-2px;margin-right:6px}
+.lock{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--fg);border-left:4px solid var(--accent);padding:12px 12px 12px 14px;margin-top:4px}
+.lock .lt{flex:1;min-width:0}
+.lock .lt b{display:block;font-size:17px;line-height:1.25;letter-spacing:-.01em;overflow-wrap:anywhere}
+.lock .lt span{display:block;margin-top:4px;color:var(--mute);font-size:13px;line-height:1.4}
+.lock .x{flex:none;width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--fg);margin:-2px -2px 0 0}
+.lock .x svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.lock .x:hover{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn:disabled:hover{background:var(--fg);color:var(--bg)}
 .btn{background:var(--fg);color:var(--bg);padding:10px 18px;font-weight:700;letter-spacing:.02em}
 .btn:hover{background:var(--accent);color:var(--onaccent)}
 .fine{color:var(--mute);font-size:12.5px;max-width:78ch}
@@ -277,6 +288,8 @@ footer p{grid-column:span 6;margin:0}
 <section class="select" aria-label="Selection">
   <div class="panel" id="pcar">
     <div class="ph"><div class="n">1</div><h2>Car</h2><div class="count mono" id="carcount"></div></div>
+    <div id="carlock" class="lock" hidden></div>
+    <div id="carpick">
     <input class="field" id="carq" type="search" placeholder="Search model, e.g. NSX, Gr.3, 1971" aria-label="Search cars" autocomplete="off">
     <div class="fgrid">
       <label><span class="lab">Country</span><select class="field" id="carcountry"></select></label>
@@ -290,15 +303,19 @@ footer p{grid-column:span 6;margin:0}
     <div class="chips" id="dtchips" role="group" aria-label="Drivetrain"></div>
     <div class="fmeta"><span class="fine">GT7 has Gr.1, Gr.3, Gr.4 and Gr.B. There is no Gr.2.</span><button class="mini" id="clearf" type="button">Clear filters</button></div>
     <div class="list" id="carlist" role="list"></div>
+    </div>
   </div>
   <div class="panel" id="ptrack">
     <div class="ph"><div class="n">2</div><h2>Track</h2><div class="count mono" id="trkcount"></div></div>
+    <div id="trklock" class="lock" hidden></div>
+    <div id="trkpick">
     <input class="field" id="trkq" type="search" placeholder="Search circuit or country" aria-label="Search tracks" autocomplete="off">
     <div class="chips" id="regions" role="group" aria-label="Region"></div>
     <div class="lab" style="margin-top:8px">Surface</div>
     <div class="chips" id="surfchips" role="group" aria-label="Surface"></div>
     <div class="list" id="trklist" role="list" style="height:236px"></div>
-    <div class="layouts"><div class="lab">Layout</div><div class="chips" id="layouts"></div>
+    </div>
+    <div class="layouts" id="layblock" hidden><div class="lab">Layout</div><div class="chips" id="layouts"></div>
       <div class="chips"><button class="chip sm" id="revbtn" aria-pressed="false">Reverse direction</button></div></div>
   </div>
   <div class="panel" id="prace">
@@ -1578,8 +1595,7 @@ function renderPrefs(){
 }
 applyTheme();setInterval(applyTheme,60000);
 function startState(){
-  st.car=CARS.find(c=>c.make==="Honda"&&c.name==="NSX 2017");
-  st.trk=TRACKS.find(t=>t.id==="suzuka");
+  st.car=null;st.trk=null;
 }
 const PRESETS=[0,400,500,550,600,650,700,750,800,900];
 
@@ -1630,6 +1646,13 @@ function initFilters(){
   fillMakes();
 }
 function renderCars(){
+  $("#carpick").hidden=!!st.car;$("#carlock").hidden=!st.car;
+  if(st.car){
+    const c=st.car;
+    $("#carlock").innerHTML=`<div class="lt"><b>${esc(c.make)} ${esc(c.name)}</b><span>${c.dt} &middot; ${c.cat} &middot; ${c.pp} PP &middot; ${esc(c.country||"")}</span></div><button class="x" data-clear="car" type="button" aria-label="Remove car, choose another"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
+    $("#carcount").textContent="Selected";
+    return;
+  }
   const q=st.q.trim().toLowerCase();
   const list=CARS.filter(c=>carPass(c,q));
   const sk=st.sort;
@@ -1641,15 +1664,23 @@ function renderCars(){
     <span class="s">${c.dt} &middot; ${c.cat}</span><span class="r mono">${c.pp} PP</span></button>`).join("")||'<p class="fine" style="padding:12px 0">No car matches that search.</p>';
 }
 function renderTracks(){
+  $("#trkpick").hidden=!!st.trk;$("#trklock").hidden=!st.trk;$("#layblock").hidden=!st.trk;
+  if(st.trk){
+    const t=st.trk;
+    $("#trklock").innerHTML=`<div class="lt"><b>${esc(t.name)}</b><span>${esc(t.c)} &middot; ${t.surf==="tarmac"?"Tarmac":t.surf==="dirt"?"Dirt":"Snow"}${t.fict?" &middot; Original":""}</span></div><button class="x" data-clear="trk" type="button" aria-label="Remove track, choose another"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
+    $("#trkcount").textContent="Selected";
+    $("#layouts").innerHTML=t.lay.map((l,i)=>`<button class="chip sm" data-lay="${i}" aria-pressed="${st.lay===i}">${esc(l.n)}</button>`).join("");
+    $("#revbtn").setAttribute("aria-pressed",st.rev);
+    return;
+  }
   const q=st.tq.trim().toLowerCase();
   const list=TRACKS.filter(t=>(st.reg==="All"||t.reg===st.reg)&&(st.surf==="All"||t.surf===st.surf)&&(!q||(t.name+" "+t.c).toLowerCase().includes(q)));
   $("#trkcount").textContent=list.length+" / "+TRACKS.length;
-  $("#trklist").innerHTML=list.map(t=>`<button class="row" role="listitem" data-trk="${t.id}" aria-pressed="${st.trk.id===t.id}">
+  $("#trklist").innerHTML=list.map(t=>`<button class="row" role="listitem" data-trk="${t.id}" aria-pressed="${!!st.trk&&st.trk.id===t.id}">
     <span class="t">${esc(t.name)}${t.isNew?'<span class="tag new">1.72</span>':''}</span>
     <span class="s">${esc(t.c)} &middot; ${t.surf==="tarmac"?"Tarmac":t.surf==="dirt"?"Dirt":"Snow"}${t.fict?" &middot; Original":""}</span>
     <span class="r mono">${t.lay.length} lay.</span></button>`).join("")||'<p class="fine" style="padding:12px 0">No circuit matches.</p>';
   $("#regions").innerHTML=REGIONS.map(r=>`<button class="chip sm" data-reg="${r}" aria-pressed="${st.reg===r}">${r}</button>`).join("");
-  $("#layouts").innerHTML=st.trk.lay.map((l,i)=>`<button class="chip sm" data-lay="${i}" aria-pressed="${st.lay===i}">${esc(l.n)}</button>`).join("");
   $("#surfchips").innerHTML=[["All","All"],["tarmac","Tarmac"],["dirt","Dirt"],["snow","Snow"]].map(o=>`<button class="chip sm" data-surf="${o[0]}" aria-pressed="${st.surf===o[0]}">${o[1]}</button>`).join("");
   $("#revbtn").setAttribute("aria-pressed",st.rev);
 }
@@ -1736,7 +1767,14 @@ function wxBadge(){
   return `<div class="wx" role="img" aria-label="Weather: ${name}">${wxIcon(k)}<span>${name}${tp}</span></div>`;
 }
 function renderStart(){
-  const car=st.car,trk=st.trk;if(!car||!trk)return;
+  const car=st.car,trk=st.trk;
+  const go=$("#startbtn");
+  if(!car||!trk){
+    go.disabled=true;
+    $("#startsum").innerHTML=`<span class="mute">${!car&&!trk?"Choose a car and a track to continue.":!car?"Now choose a car.":"Now choose a track."}</span>`+(car?`<br><b>${esc(car.make)} ${esc(car.name)}</b>`:"")+(trk?`<br><b>${esc(trk.name)}</b>`:"");
+    return;
+  }
+  go.disabled=false;
   const lay=trk.lay[st.lay]||trk.lay[0],race=RACES.find(r=>r.id===st.race);
   const wx={clear:"Clear",cloud:"Overcast",rain:"Light rain",storm:"Heavy rain"}[effWx()];
   $("#startsum").innerHTML=`<b>${esc(car.make)} ${esc(car.name)}</b> <span class="mute">&middot; ${car.pp} PP</span><br><b>${esc(trk.name)}</b> <span class="mute">&middot; ${esc(lay.n)}${st.rev?" (reverse)":""}</span><br><span class="mute">${esc(race.n)} &middot; ${st.laps} laps &middot; ${wx}${st.limit?" &middot; PP limit "+st.limit:""}</span>`;
@@ -1804,6 +1842,15 @@ function showView(v){
   try{window.scrollTo({top:0,behavior:"smooth"})}catch(_){window.scrollTo(0,0)}
 }
 function renderResult(){
+  if(!st.car||!st.trk){
+    $("#surfro").textContent=st.trk?(st.trk.surf==="tarmac"?"Tarmac":st.trk.surf==="dirt"?"Dirt":"Snow"):"Pick a track";
+    $("#wxsel").value=st.weather;$("#condsel").value=st.cond;$("#tempsel").value=st.temp;
+    $("#fuelsel").value=String(st.fuel);$("#wearsel").value=String(st.wear);
+    $("#tyresel").disabled=true;$("#tyread").textContent="Pick a car and track first";
+    $("#lapread").textContent="Pick a car and track first";$("#fuelread").textContent="";$("#wearread").textContent="";
+    $("#wxread").textContent="";$("#condread").textContent="";$("#tempread").textContent="";
+    renderStart();return;
+  }
   const car=st.car,trk=st.trk,lay=trk.lay[st.lay]||trk.lay[0];
   const t=effTrack(trk,lay);
   if(!st.lapsManual)st.laps=defLaps(car,t,st.race);
@@ -1913,7 +1960,8 @@ function renderAll(){renderCars();renderTracks();renderRace();renderResult()}
 document.addEventListener("click",e=>{
   if(!e.target.closest(".setwrap")){const p=$("#setpanel");if(p&&!p.hidden){p.hidden=true;$("#setbtn").setAttribute("aria-expanded","false")}}
   const b=e.target.closest("button");if(!b)return;
-  if(b.dataset.car!==undefined){st.car=CARS.find(c=>c.id===+b.dataset.car);renderCars();renderResult()}
+  if(b.dataset.clear){if(b.dataset.clear==="car")st.car=null;else{st.trk=null;st.lay=0;st.rev=false}renderCars();renderTracks();renderResult()}
+  else if(b.dataset.car!==undefined){st.car=CARS.find(c=>c.id===+b.dataset.car);renderCars();renderResult()}
   else if(b.dataset.trk){st.trk=TRACKS.find(t=>t.id===b.dataset.trk);st.lay=0;renderTracks();renderResult()}
   else if(b.dataset.lay!==undefined){st.lay=+b.dataset.lay;renderTracks();renderResult()}
   else if(b.dataset.reg){st.reg=b.dataset.reg;renderTracks()}
@@ -1966,6 +2014,8 @@ $("#tempsel").addEventListener("change",e=>{st.temp=e.target.value;renderResult(
 $("#fuelsel").addEventListener("change",e=>{st.fuel=+e.target.value;renderResult()});
 $("#wearsel").addEventListener("change",e=>{st.wear=+e.target.value;renderResult()});
 document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.classList&&e.target.classList.contains("gname")){e.preventDefault();e.target.blur();return}if(e.key==="Escape"){const p=$("#setpanel");if(!p.hidden){p.hidden=true;$("#setbtn").setAttribute("aria-expanded","false");$("#setbtn").focus()}}});
+/* block pinch-zoom (Safari fires gesture events) */
+["gesturestart","gesturechange","gestureend"].forEach(n=>document.addEventListener(n,e=>e.preventDefault(),{passive:false}));
 renderPrefs();
 document.addEventListener("change",e=>{const i=e.target.closest&&e.target.closest(".gname");if(!i)return;const g=GAR.find(x=>x.id===i.closest(".gcard").dataset.gid);if(g){g.name=i.value.trim()||g.name;saveGarage()}});
 renderGCount();
